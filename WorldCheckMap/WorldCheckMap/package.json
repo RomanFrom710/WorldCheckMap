@@ -1,10 +1,19 @@
 {
+  "name": "world-check-map",
   "version": "1.0.0",
-  "name": "asp.net",
-  "private": true,
-  "dependencies": {
-    
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RomanFrom710/WorldCheckMap.git"
+  },
+  "author": "Roman Chaley",
+  "license": "ISC",
+  "homepage": "https://github.com/RomanFrom710/WorldCheckMap",
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }

@@ -1,0 +1,32 @@
+﻿[
+  {
+    "outputFileName": "wwwroot/js/lib.min.js",
+    "inputFiles": [
+      "node_modules/react/dist/react.js",
+      "node_modules/react-dom/dist/react-dom.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "node_modules/react/dist/react.js",
+      "node_modules/react-dom/dist/react-dom.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    "sourceMap": true
+  },
+  {
+    "outputFileName": "wwwroot/css/site.min.css",
+    "inputFiles": [
+      "wwwroot/css/site.css"
+    ]
+  }
+]
