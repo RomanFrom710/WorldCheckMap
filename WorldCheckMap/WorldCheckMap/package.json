@@ -14,6 +14,12 @@
   "homepage": "https://github.com/RomanFrom710/WorldCheckMap",
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "webpack": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "jsx-loader": "^0.13.2"
   }
 }
