@@ -28,6 +28,7 @@
     "jsx-loader": "^0.13.2",
     "less": "^3.0.0-alpha.3",
     "less-loader": "^4.0.5",
-    "style-loader": "^0.19.0"
+    "style-loader": "^0.19.0",
+    "webpack-aspnet-middleware": "^0.7.7"
   }
 }
