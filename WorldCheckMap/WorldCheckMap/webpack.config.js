@@ -6,8 +6,12 @@ module.exports = {
         path.join(__dirname, 'app/start.jsx')
     ],
     output: {
-        path: path.join(__dirname, 'wwwroot'),
+        path: path.join(__dirname, 'wwwroot/bundles'),
+        publicPath: '/',
         filename: 'bundle.js'
+    },
+    resolve: {
+        modules: ['node_modules']
     },
     module: {
         rules: [
