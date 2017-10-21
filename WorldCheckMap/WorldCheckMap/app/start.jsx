@@ -1,8 +1,12 @@
 ﻿import React from 'react';
 import { render } from 'react-dom';
-import 'bootstrap/dist/bootstrap.css';
+import { AppContainer } from 'react-hot-loader';
+
+import 'bootstrap/less/bootstrap.less';
 
 render(
-    <p>Hi there</p>,
+    <AppContainer>
+        <p>Hi thereee</p>
+    </AppContainer>,
     document.getElementById('react-root')
 );

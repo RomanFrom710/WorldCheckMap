@@ -2,16 +2,20 @@
 
 
 module.exports = {
-    entry: [
-        path.join(__dirname, 'app/start.jsx')
-    ],
+    entry: {
+        main: ['react-hot-loader/patch', './app/start.jsx']
+    },
     output: {
-        path: path.join(__dirname, 'wwwroot/bundles'),
+        path: path.join(__dirname, './wwwroot/bundles'),
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     resolve: {
-        modules: ['node_modules']
+        modules: [
+            '/',
+            'node_modules'
+        ],
+        extensions: ['.jsx', '.js']
     },
     module: {
         rules: [
@@ -32,9 +36,19 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(woff|woff2|eot|svg|ttf|png|jpg|jpeg)$/,
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 3000
+                    }
+                }]
+            },
+            {
                 test: /\.(css|less)$/,
                 use: ['style-loader', 'css-loader', 'less-loader']
             }
         ]
-    }
+    },
+    plugins: []
 };
