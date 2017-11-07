@@ -3,11 +3,11 @@
 
 module.exports = {
     entry: {
-        main: ['react-hot-loader/patch', './app/start.jsx']
+        main: ['./app/start.jsx']
     },
     output: {
         path: path.join(__dirname, './wwwroot/bundles'),
-        publicPath: '/',
+        publicPath: '/bundles/',
         filename: '[name].js'
     },
     resolve: {
@@ -32,6 +32,9 @@ module.exports = {
                                 'react'
                             ]
                         }
+                    },
+                    {
+                        loader: 'webpack-module-hot-accept'
                     }
                 ]
             },
