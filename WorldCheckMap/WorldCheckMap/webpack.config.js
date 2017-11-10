@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /.jsx?$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -32,14 +32,11 @@ module.exports = {
                                 'react'
                             ]
                         }
-                    },
-                    {
-                        loader: 'webpack-module-hot-accept'
                     }
                 ]
             },
             {
-                test: /\.(woff|woff2|eot|svg|ttf|png|jpg|jpeg)$/,
+                test: /\.(woff|woff2|eot|svg|ttf|png|jpg|jpeg|json)$/,
                 use: [{
                     loader: 'url-loader',
                     options: {
