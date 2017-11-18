@@ -2,7 +2,7 @@
 
 
 export default class Header extends Component {
-    render() { // todo: Add navigation
+    render() {
         return (
             <nav className="navbar navbar-inverse">
                 <div className="container">
