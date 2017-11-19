@@ -378,4 +378,4 @@ __pycache__/
 
 # End of https://www.gitignore.io/api/node,windows,visualstudio
 
-WorldCheckMap/WorldCheckMap/wwwroot/bundles/*
+WorldCheckMap/WorldCheckMap.Web/wwwroot/bundles/*
