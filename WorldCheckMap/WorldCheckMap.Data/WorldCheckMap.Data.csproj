@@ -52,6 +52,11 @@
   <ItemGroup>
     <Compile Include="Enums\CountryStatus.cs" />
     <Compile Include="Initialization\CountriesParser.cs" />
+    <Compile Include="Initialization\Data\InitializationData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InitializationData.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Country.cs" />
@@ -62,8 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Initialization\countries.json" />
+    <None Include="Initialization\Data\Countries.json" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Initialization\Data\InitializationData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>InitializationData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
