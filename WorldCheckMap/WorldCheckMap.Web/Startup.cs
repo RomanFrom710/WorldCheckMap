@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using WorldCheckMap.DependencyInjection;
 
-namespace WorldCheckMap
+namespace WorldCheckMap.Web
 {
     public class Startup
     {
@@ -28,6 +30,11 @@ namespace WorldCheckMap
             // Add framework services.
             services.AddMvc();
             services.AddNodeServices();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            ContainerConfigurator.ConfigureContainer(builder);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

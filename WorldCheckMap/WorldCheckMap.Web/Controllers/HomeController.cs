@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WorldCheckMap.Controllers
+namespace WorldCheckMap.Web.Controllers
 {
     public class HomeController : Controller
     {

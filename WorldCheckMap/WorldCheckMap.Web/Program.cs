@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace WorldCheckMap
+namespace WorldCheckMap.Web
 {
     public class Program
     {

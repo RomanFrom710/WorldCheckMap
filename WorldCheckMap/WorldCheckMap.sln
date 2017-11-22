@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Data", "World
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Tests", "WorldCheckMap.Tests\WorldCheckMap.Tests.csproj", "{880B864B-3264-4913-8405-11BEBB30D7E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.DependencyInjection", "WorldCheckMap.DependencyInjection\WorldCheckMap.DependencyInjection.csproj", "{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{880B864B-3264-4913-8405-11BEBB30D7E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{880B864B-3264-4913-8405-11BEBB30D7E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{880B864B-3264-4913-8405-11BEBB30D7E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
