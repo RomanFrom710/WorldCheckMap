@@ -6,12 +6,13 @@ using WorldCheckMap.Data.Models;
 namespace WorldCheckMap.Tests.DataLayer
 {
     [TestClass]
-    public class CountriesParserTest
+    public class JsonCountriesStorageTest
     {
         [TestMethod]
         public void SmokeTest()
         {
-            var countries = CountriesParser.GetCountries();
+            var storage = new JsonCountriesStorage();
+            var countries = storage.GetCountries();
             Assert.IsNotNull(countries);
             Assert.IsInstanceOfType(countries, typeof(IEnumerable<Country>));
             Assert.IsTrue(countries.Count > 0);
@@ -20,14 +21,16 @@ namespace WorldCheckMap.Tests.DataLayer
         [TestMethod]
         public void QuantityTest()
         {
-            var countries = CountriesParser.GetCountries();
+            var storage = new JsonCountriesStorage();
+            var countries = storage.GetCountries();
             Assert.AreEqual(countries.Count, 180);
         }
 
         [TestMethod]
         public void CorrentInfoTest()
         {
-            var countries = CountriesParser.GetCountries();
+            var storage = new JsonCountriesStorage();
+            var countries = storage.GetCountries();
             var belarus = countries.Find(c => c.Name == "Belarus");
             var uk = countries.Find(c => c.Name == "United Kingdom");
             Assert.AreEqual(belarus.Code, "BLR");

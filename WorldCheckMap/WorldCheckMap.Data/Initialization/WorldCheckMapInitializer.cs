@@ -1,14 +1,27 @@
-﻿using System.Data.Entity;
+﻿using System.Threading.Tasks;
+using WorldCheckMap.Data.Initialization.Interfaces;
 
 namespace WorldCheckMap.Data.Initialization
 {
-    internal class WorldCheckMapInitializer : CreateDatabaseIfNotExists<WorldCheckMapContext>
+    public class WorldCheckMapInitializer : IWorldCheckMapInitializer
     {
-        protected override void Seed(WorldCheckMapContext context)
+        private readonly WorldCheckMapContext _context;
+        private readonly ICountriesStorage _storage;
+
+        public WorldCheckMapInitializer(WorldCheckMapContext context, ICountriesStorage storage)
         {
-            var countries = CountriesParser.GetCountries();
-            context.Countries.AddRange(countries);
-            context.SaveChanges();
+            _context = context;
+            _storage = storage;
+        }
+
+        public async Task InitializeWorldCheckMapDatabaseAsync()
+        {
+            if (await _context.Database.EnsureCreatedAsync())
+            {
+                var countries = _storage.GetCountries();
+                _context.Countries.AddRange(countries);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

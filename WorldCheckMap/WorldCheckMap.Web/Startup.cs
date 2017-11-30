@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -30,11 +29,10 @@ namespace WorldCheckMap.Web
             // Add framework services.
             services.AddMvc();
             services.AddNodeServices();
-        }
 
-        public void ConfigureContainer(ContainerBuilder builder)
-        {
-            ContainerConfigurator.ConfigureContainer(builder);
+            services.AddSqlContext(Configuration.GetConnectionString("WorldCheckMap"));
+            services.AddDataLayerConnector();
+            services.AddServiceLayerConnector();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
