@@ -14,7 +14,7 @@ namespace WorldCheckMap.Services.Initialization
 
         public async Task InitializeDataAsync()
         {
-            await _initializer.InitializeWorldCheckMapDatabaseAsync();
+            await _initializer.InitializeDatabaseAsync();
         }
     }
 }

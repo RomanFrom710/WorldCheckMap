@@ -111,10 +111,8 @@
     <Compile Include="Initialization\WorldCheckMapInitializer.cs" />
     <Compile Include="Repositories\Account\AccountRepository.cs" />
     <Compile Include="Repositories\Account\IAccountRepository.cs" />
-    <Compile Include="Repositories\Account\MockAccountRepository.cs" />
     <Compile Include="Repositories\Country\CountryRepository.cs" />
     <Compile Include="Repositories\Country\ICountryRepository.cs" />
-    <Compile Include="Repositories\Country\MockCountryRepository.cs" />
     <Compile Include="WorldCheckMapContext.cs" />
   </ItemGroup>
   <ItemGroup>

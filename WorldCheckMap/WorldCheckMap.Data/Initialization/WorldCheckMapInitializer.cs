@@ -14,7 +14,7 @@ namespace WorldCheckMap.Data.Initialization
             _storage = storage;
         }
 
-        public async Task InitializeWorldCheckMapDatabaseAsync()
+        public async Task InitializeDatabaseAsync()
         {
             if (await _context.Database.EnsureCreatedAsync())
             {
