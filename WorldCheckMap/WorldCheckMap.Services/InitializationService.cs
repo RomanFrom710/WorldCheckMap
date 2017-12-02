@@ -1,7 +1,8 @@
 ﻿using System.Threading.Tasks;
 using WorldCheckMap.Data.Initialization;
+using WorldCheckMap.Services.Interfaces;
 
-namespace WorldCheckMap.Services.Initialization
+namespace WorldCheckMap.Services
 {
     public class InitializationService : IInitializationService
     {

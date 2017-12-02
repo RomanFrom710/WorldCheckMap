@@ -44,9 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Initialization\IInitializationService.cs" />
-    <Compile Include="Initialization\InitializationService.cs" />
+    <Compile Include="Interfaces\IInitializationService.cs" />
+    <Compile Include="InitializationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AccountService.cs" />
+    <Compile Include="Interfaces\IAccountService.cs" />
+    <Compile Include="CountryService.cs" />
+    <Compile Include="Interfaces\ICountryService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WorldCheckMap.Data\WorldCheckMap.Data.csproj">

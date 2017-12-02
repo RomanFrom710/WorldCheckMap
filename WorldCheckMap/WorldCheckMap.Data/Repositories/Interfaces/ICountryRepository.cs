@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WorldCheckMap.Data.Repositories.Country
+namespace WorldCheckMap.Data.Repositories.Interfaces
 {
     public interface ICountryRepository
     {

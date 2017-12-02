@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Data;
-using WorldCheckMap.Data.Repositories.Country;
+using WorldCheckMap.Data.Repositories;
 using WorldCheckMap.Tests.Helpers;
 
 namespace WorldCheckMap.Tests.DataLayer

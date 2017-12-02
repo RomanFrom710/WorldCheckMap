@@ -1,4 +1,4 @@
-﻿namespace WorldCheckMap.Data.Repositories.Account
+﻿namespace WorldCheckMap.Data.Repositories.Interfaces
 {
     public interface IAccountRepository
     {

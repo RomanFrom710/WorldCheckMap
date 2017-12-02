@@ -4,8 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using WorldCheckMap.Data;
 using WorldCheckMap.Data.Initialization;
 using WorldCheckMap.Data.Initialization.Interfaces;
-using WorldCheckMap.Data.Repositories.Country;
-using WorldCheckMap.Services.Initialization;
+using WorldCheckMap.Data.Repositories;
+using WorldCheckMap.Data.Repositories.Interfaces;
+using WorldCheckMap.Services;
+using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.DependencyInjection
 {

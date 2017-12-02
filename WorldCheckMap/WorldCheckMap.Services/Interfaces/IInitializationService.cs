@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WorldCheckMap.Services.Initialization
+namespace WorldCheckMap.Services.Interfaces
 {
     public interface IInitializationService
     {

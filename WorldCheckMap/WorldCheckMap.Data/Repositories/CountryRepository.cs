@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using WorldCheckMap.Data.Repositories.Interfaces;
 
-namespace WorldCheckMap.Data.Repositories.Country
+namespace WorldCheckMap.Data.Repositories
 {
     public class CountryRepository : ICountryRepository
     {
