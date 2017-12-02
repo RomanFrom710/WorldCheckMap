@@ -33,9 +33,10 @@ namespace WorldCheckMap.Tests.DataLayer
             {
                 InitializeDb(db);
                 var repository = new CountryRepository(db);
-                var countries = repository.GetCountries().ToList();
 
+                var countries = repository.GetCountries().ToList();
                 var sourceCountries = DataLayerMocks.Countries;
+
                 var areSame = countries.TrueForAll(c => sourceCountries.Find(sc => sc.Equals(c)) != null);
                 Assert.IsTrue(areSame);
             }

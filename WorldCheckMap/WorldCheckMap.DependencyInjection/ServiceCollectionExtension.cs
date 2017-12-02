@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WorldCheckMap.Data;
 using WorldCheckMap.Data.Initialization;
@@ -16,7 +15,9 @@ namespace WorldCheckMap.DependencyInjection
         public static IServiceCollection AddServiceLayerConnector(this IServiceCollection services)
         {
             return services
-                .AddScoped<IInitializationService, InitializationService>();
+                .AddScoped<IInitializationService, InitializationService>()
+                .AddScoped<ICountryService, CountryService>()
+                .AddScoped<IAccountService, AccountService>();
         }
 
         public static IServiceCollection AddDataLayerConnector(this IServiceCollection services)

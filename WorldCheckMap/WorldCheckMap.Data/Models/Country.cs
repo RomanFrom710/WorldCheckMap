@@ -1,10 +1,15 @@
-﻿namespace WorldCheckMap.Data.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WorldCheckMap.Data.Models
 {
     public class Country : BaseModel
     {
+        [Required]
         public string Code { get; set; }
 
+        [Required]
         public string Name { get; set; }
+
 
         public override bool Equals(object obj)
         {
@@ -13,12 +18,12 @@
                 return false;
             }
 
-            return otherCountry.Name == Name && otherCountry.Code == Code;
+            return otherCountry.Id == Id && otherCountry.Name == Name && otherCountry.Code == Code;
         }
 
         public override int GetHashCode()
         {
-            return Code.GetHashCode() * Name.GetHashCode();
+            return Id.GetHashCode() * Code.GetHashCode() * Name.GetHashCode();
         }
     }
 }

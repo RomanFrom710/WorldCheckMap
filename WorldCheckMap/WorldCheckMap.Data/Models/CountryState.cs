@@ -1,4 +1,5 @@
-﻿using WorldCheckMap.Data.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using WorldCheckMap.Data.Enums;
 
 namespace WorldCheckMap.Data.Models
 {
@@ -6,6 +7,7 @@ namespace WorldCheckMap.Data.Models
     {
         public virtual Country Country { get; set; }
 
+        [Required]
         public CountryStatus Status { get; set; }
 
         public virtual Account Account { get; set; }

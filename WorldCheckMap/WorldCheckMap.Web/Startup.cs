@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
@@ -29,6 +30,7 @@ namespace WorldCheckMap.Web
             // Add framework services.
             services.AddMvc();
             services.AddNodeServices();
+            services.AddAutoMapper();
 
             services.AddSqlContext(Configuration.GetConnectionString("WorldCheckMap"));
             services.AddDataLayerConnector();
