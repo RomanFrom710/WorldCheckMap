@@ -99,7 +99,6 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -114,10 +113,6 @@
     <ProjectReference Include="..\WorldCheckMap.Services\WorldCheckMap.Services.csproj">
       <Project>{8a9a89b9-64b1-4f54-9615-7012e3376ac1}</Project>
       <Name>WorldCheckMap.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WorldCheckMap.Tests\WorldCheckMap.Tests.csproj">
-      <Project>{880b864b-3264-4913-8405-11bebb30d7e0}</Project>
-      <Name>WorldCheckMap.Tests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

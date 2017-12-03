@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCheckMap.Web", "WorldCheckMap.Web\WorldCheckMap.Web.csproj", "{91D33E7C-8EA8-49CE-A0B0-0DB203F6B901}"
 EndProject
@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Services", "W
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Data", "WorldCheckMap.Data\WorldCheckMap.Data.csproj", "{EF76A678-CF15-4AA6-8D54-90C7F20A20E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Tests", "WorldCheckMap.Tests\WorldCheckMap.Tests.csproj", "{880B864B-3264-4913-8405-11BEBB30D7E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.UnitTests", "WorldCheckMap.UnitTests\WorldCheckMap.UnitTests.csproj", "{880B864B-3264-4913-8405-11BEBB30D7E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.DependencyInjection", "WorldCheckMap.DependencyInjection\WorldCheckMap.DependencyInjection.csproj", "{80F86D1D-8E4C-4AEC-8E26-0FC81102A6B2}"
 EndProject
