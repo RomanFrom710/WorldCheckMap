@@ -5,11 +5,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Data.Initialization;
 using WorldCheckMap.Data.Models;
 using WorldCheckMap.Tests.Helpers;
+using WorldCheckMap.Tests.Helpers.EqualityComparison;
 
 namespace WorldCheckMap.Tests.DataLayer
 {
     [TestClass]
-    public class InitializerTest
+    public class DatabaseInitializerTest
     {
         private async Task<List<Country>> GetCountriesFromInitializer()
         {
@@ -36,11 +37,9 @@ namespace WorldCheckMap.Tests.DataLayer
         public async Task EqualityTest()
         {
             var countries = await GetCountriesFromInitializer();
-            var sourceCountries = DataLayerMocks.Countries;
+            var sourceCountries = TestData.Countries;
 
-            Assert.AreEqual(countries.Count, sourceCountries.Count);
-
-            var areSame = countries.TrueForAll(c => sourceCountries.Find(sc => sc.Equals(c)) != null);
+            var areSame = countries.IsEqual(sourceCountries);
             Assert.IsTrue(areSame);
         }
     }

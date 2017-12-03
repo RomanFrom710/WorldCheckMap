@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Data;
 using WorldCheckMap.Data.Repositories;
 using WorldCheckMap.Tests.Helpers;
+using WorldCheckMap.Tests.Helpers.EqualityComparison;
 
 namespace WorldCheckMap.Tests.DataLayer
 {
@@ -11,7 +12,7 @@ namespace WorldCheckMap.Tests.DataLayer
     {
         private void InitializeDb(WorldCheckMapContext db)
         {
-            db.Countries.AddRange(DataLayerMocks.Countries);
+            db.Countries.AddRange(TestData.Countries);
         }
 
         [TestMethod]
@@ -35,9 +36,9 @@ namespace WorldCheckMap.Tests.DataLayer
                 var repository = new CountryRepository(db);
 
                 var countries = repository.GetCountries().ToList();
-                var sourceCountries = DataLayerMocks.Countries;
+                var sourceCountries = TestData.Countries;
 
-                var areSame = countries.TrueForAll(c => sourceCountries.Find(sc => sc.Equals(c)) != null);
+                var areSame = countries.IsEqual(sourceCountries);
                 Assert.IsTrue(areSame);
             }
         }

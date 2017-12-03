@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Data.Repositories;
 using WorldCheckMap.Services;
 using WorldCheckMap.Tests.Helpers;
+using WorldCheckMap.Tests.Helpers.EqualityComparison;
 
 namespace WorldCheckMap.Tests.ServiceLayer
 {
@@ -28,10 +29,9 @@ namespace WorldCheckMap.Tests.ServiceLayer
             var service = new CountryService(repository, mapper);
 
             var countries = service.GetCountries().ToList();
-            var sourceCountries = DataLayerMocks.Countries;
-
-            Assert.IsNotNull(countries);
-            var areSame = countries.TrueForAll(c => sourceCountries.Find(sc => sc.Id == c.Id) != null);
+            var sourceCountries = TestData.CountryDtos;
+            
+            var areSame = countries.IsEqual(sourceCountries);
             Assert.IsTrue(areSame);
         }
     }

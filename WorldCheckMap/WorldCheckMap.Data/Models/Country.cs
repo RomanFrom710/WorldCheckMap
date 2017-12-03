@@ -9,21 +9,5 @@ namespace WorldCheckMap.Data.Models
 
         [Required]
         public string Name { get; set; }
-
-
-        public override bool Equals(object obj)
-        {
-            if (!(obj is Country otherCountry))
-            {
-                return false;
-            }
-
-            return otherCountry.Id == Id && otherCountry.Name == Name && otherCountry.Code == Code;
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode() * Code.GetHashCode() * Name.GetHashCode();
-        }
     }
 }
