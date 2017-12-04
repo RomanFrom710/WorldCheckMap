@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using WorldCheckMap.Data.Initialization;
+using WorldCheckMap.DataAccess.Initialization;
 using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Services

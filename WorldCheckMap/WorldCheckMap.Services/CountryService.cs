@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using WorldCheckMap.Data.Models;
-using WorldCheckMap.Data.Repositories.Interfaces;
+using WorldCheckMap.DataAccess.Repositories.Interfaces;
 using WorldCheckMap.Services.Dto;
 using WorldCheckMap.Services.Interfaces;
 
