@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Initialization;
 using WorldCheckMap.DataAccess.Models;
@@ -12,31 +11,31 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
     [TestClass]
     public class DatabaseInitializerTest
     {
-        private async Task<List<Country>> GetCountriesFromInitializer()
+        private List<Country> GetCountriesFromInitializer()
         {
             using (var db = DbContextBuilder.GetContext())
             {
                 var storage = DataLayerMocks.GetCountryStorageMock();
                 var initializer = new WorldCheckMapInitializer(db, storage);
-                await initializer.InitializeDatabaseAsync();
+                initializer.InitializeDatabase();
 
-                var countries = await db.Countries.ToListAsync();
+                var countries = db.Countries.ToList();
                 return countries;
             }
         }
 
         [TestMethod]
-        public async Task SmokeTest()
+        public void SmokeTest()
         {
-            var countries = await GetCountriesFromInitializer();
+            var countries = GetCountriesFromInitializer();
             Assert.IsNotNull(countries);
             Assert.IsTrue(countries.Count > 0);
         }
 
         [TestMethod]
-        public async Task EqualityTest()
+        public void EqualityTest()
         {
-            var countries = await GetCountriesFromInitializer();
+            var countries = GetCountriesFromInitializer();
             var sourceCountries = TestData.Countries;
 
             var areSame = countries.IsEqual(sourceCountries);

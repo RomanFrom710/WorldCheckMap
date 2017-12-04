@@ -23,7 +23,7 @@ namespace WorldCheckMap.DependencyInjection
         public static IServiceCollection AddDataLayerConnector(this IServiceCollection services)
         {
             return services
-                .AddScoped<IWorldCheckMapInitializer, IWorldCheckMapInitializer>()
+                .AddScoped<IWorldCheckMapInitializer, WorldCheckMapInitializer>()
                 .AddScoped<ICountriesStorage, JsonCountriesStorage>()
                 .AddScoped<ICountryRepository, CountryRepository>();
         }

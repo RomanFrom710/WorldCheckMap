@@ -1,21 +1,20 @@
-﻿using System.Threading.Tasks;
-using WorldCheckMap.DataAccess.Initialization;
+﻿using WorldCheckMap.DataAccess.Initialization.Interfaces;
 using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Services
 {
     public class InitializationService : IInitializationService
     {
-        private readonly WorldCheckMapInitializer _initializer;
+        private readonly IWorldCheckMapInitializer _initializer;
 
-        public InitializationService(WorldCheckMapInitializer initializer)
+        public InitializationService(IWorldCheckMapInitializer initializer)
         {
             _initializer = initializer;
         }
 
-        public async Task InitializeDataAsync()
+        public void InitializeData()
         {
-            await _initializer.InitializeDatabaseAsync();
+            _initializer.InitializeDatabase();
         }
     }
 }

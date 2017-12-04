@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using WorldCheckMap.DataAccess.Initialization.Interfaces;
+﻿using WorldCheckMap.DataAccess.Initialization.Interfaces;
 
 namespace WorldCheckMap.DataAccess.Initialization
 {
@@ -14,14 +13,16 @@ namespace WorldCheckMap.DataAccess.Initialization
             _storage = storage;
         }
 
-        public async Task InitializeDatabaseAsync()
+        public void InitializeDatabase()
         {
-            if (await _context.Database.EnsureCreatedAsync())
+            if (!_context.Database.EnsureCreated())
             {
-                var countries = _storage.GetCountries();
-                _context.Countries.AddRange(countries);
-                await _context.SaveChangesAsync();
+                return;
             }
+
+            var countries = _storage.GetCountries();
+            _context.Countries.AddRange(countries);
+            _context.SaveChanges();
         }
     }
 }

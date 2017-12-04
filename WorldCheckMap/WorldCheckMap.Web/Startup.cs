@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WorldCheckMap.DependencyInjection;
+using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Web
 {
@@ -45,18 +46,7 @@ namespace WorldCheckMap.Web
 
             if (env.IsDevelopment())
             {
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                {
-                    HotModuleReplacement = true,
-                    ReactHotModuleReplacement = true,
-                    HotModuleReplacementClientOptions = new Dictionary<string, string>
-                    {
-                        { "dynamicPublicPath", "true" }
-                    }
-                });
-
-                app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                SetupDevelopmentFeatures(app);
             }
             else
             {
@@ -64,7 +54,29 @@ namespace WorldCheckMap.Web
             }
 
             app.UseStaticFiles();
+            SetupMvc(app);
+            InitializeDatabase(app);
+        }
 
+
+        private void SetupDevelopmentFeatures(IApplicationBuilder app)
+        {
+            app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+            {
+                HotModuleReplacement = true,
+                ReactHotModuleReplacement = true,
+                HotModuleReplacementClientOptions = new Dictionary<string, string>
+                {
+                    { "dynamicPublicPath", "true" }
+                }
+            });
+
+            app.UseDeveloperExceptionPage();
+            app.UseBrowserLink();
+        }
+
+        private void SetupMvc(IApplicationBuilder app)
+        {
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -75,6 +87,17 @@ namespace WorldCheckMap.Web
                     name: "spa-fallback",
                     defaults: new { controller = "Home", action = "Index" });
             });
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+
+            using (var scope = scopeFactory.CreateScope())
+            {
+                var initializer = scope.ServiceProvider.GetRequiredService<IInitializationService>();
+                initializer.InitializeData();
+            }
         }
     }
 }

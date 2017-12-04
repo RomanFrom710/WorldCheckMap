@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace WorldCheckMap.Services.Interfaces
+﻿namespace WorldCheckMap.Services.Interfaces
 {
     public interface IInitializationService
     {
-        Task InitializeDataAsync();
+        void InitializeData();
     }
 }

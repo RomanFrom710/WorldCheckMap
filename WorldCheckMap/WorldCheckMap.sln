@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCheckMap.Services", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCheckMap.DependencyInjection", "WorldCheckMap.DependencyInjection\WorldCheckMap.DependencyInjection.csproj", "{F1891835-2A24-42B7-9AD5-370CB76D1EA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Tests.Unit", "WorldCheckMap.Tests.Unit\WorldCheckMap.Tests.Unit.csproj", "{0B45503A-829B-40ED-B103-B8946DCE6FE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldCheckMap.Tests.Unit", "WorldCheckMap.Tests.Unit\WorldCheckMap.Tests.Unit.csproj", "{0B45503A-829B-40ED-B103-B8946DCE6FE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldCheckMap.Tests.Integration", "WorldCheckMap.Tests.Integration\WorldCheckMap.Tests.Integration.csproj", "{87B7704E-DEC0-4ED4-8ACF-3DA1225CD81D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{0B45503A-829B-40ED-B103-B8946DCE6FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B45503A-829B-40ED-B103-B8946DCE6FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B45503A-829B-40ED-B103-B8946DCE6FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87B7704E-DEC0-4ED4-8ACF-3DA1225CD81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87B7704E-DEC0-4ED4-8ACF-3DA1225CD81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87B7704E-DEC0-4ED4-8ACF-3DA1225CD81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87B7704E-DEC0-4ED4-8ACF-3DA1225CD81D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
