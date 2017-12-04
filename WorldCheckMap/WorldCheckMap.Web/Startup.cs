@@ -31,7 +31,7 @@ namespace WorldCheckMap.Web
             services.AddNodeServices();
             services.AddAutoMapper();
 
-            services.AddSqlContext(Configuration.GetConnectionString("WorldCheckMap"));
+            AddContext(services);
             services.AddDataLayerConnector();
             services.AddServiceLayerConnector();
         }
@@ -52,7 +52,12 @@ namespace WorldCheckMap.Web
 
             app.UseStaticFiles();
             SetupMvc(app);
-            InitializeDatabase(app);
+            InitializeData(app);
+        }
+
+        protected virtual void AddContext(IServiceCollection services)
+        {
+            services.AddSqlContext(Configuration.GetConnectionString("WorldCheckMap"));
         }
 
 
@@ -86,7 +91,7 @@ namespace WorldCheckMap.Web
             });
         }
 
-        private void InitializeDatabase(IApplicationBuilder app)
+        private void InitializeData(IApplicationBuilder app)
         {
             var scopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
 

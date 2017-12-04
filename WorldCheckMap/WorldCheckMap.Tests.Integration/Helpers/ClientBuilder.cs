@@ -1,9 +1,7 @@
-﻿using System;
+﻿using System.IO;
 using System.Net.Http;
-using System.Reflection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using WorldCheckMap.Web;
 
 namespace WorldCheckMap.Tests.Integration.Helpers
 {
@@ -13,11 +11,9 @@ namespace WorldCheckMap.Tests.Integration.Helpers
 
         private static TestServer GetTestServer()
         {
-            var startupAssembly = typeof(Startup).GetTypeInfo().Assembly;
-            //var contentRoot = GetProjectPath(relativeTargetProjectParentDir, startupAssembly);
             return new TestServer(new WebHostBuilder()
-                .UseContentRoot(new Uri(startupAssembly.CodeBase).AbsolutePath)
-                .UseStartup<Startup>());
+                .UseContentRoot(Path.GetFullPath(@"../../../../WorldCheckMap.Web/")) // not nice...
+                .UseStartup<TestStartup>());
         }
 
         internal static HttpClient GetClient()

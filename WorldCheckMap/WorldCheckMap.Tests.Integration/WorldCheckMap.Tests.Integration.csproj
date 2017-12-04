@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WorldCheckMap.DependencyInjection\WorldCheckMap.DependencyInjection.csproj" />
     <ProjectReference Include="..\WorldCheckMap.Services\WorldCheckMap.Services.csproj" />
     <ProjectReference Include="..\WorldCheckMap.Web\WorldCheckMap.Web.csproj" />
   </ItemGroup>

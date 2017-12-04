@@ -33,5 +33,11 @@ namespace WorldCheckMap.DependencyInjection
             return 
                 services.AddDbContext<WorldCheckMapContext>(options => options.UseSqlServer(connectionString));
         }
+
+        public static IServiceCollection AddInMemoryContext(this IServiceCollection services)
+        {
+            return
+                services.AddDbContext<WorldCheckMapContext>(options => options.UseInMemoryDatabase("WorldCheckMap"));
+        }
     }
 }
