@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services.Dto;
@@ -20,5 +21,24 @@ namespace WorldCheckMap.Tests.Unit.Helpers
             Code = c.Code,
             Name = c.Name
         }).ToList();
+
+
+        internal static List<Account> Accounts = new List<Account>
+        {
+            new Account
+            {
+                Id = 1,
+                Name = "Roman",
+                Guid = Guid.NewGuid(),
+                Created = DateTime.Now.AddDays(-7)
+            },
+            new Account
+            {
+                Id = 2,
+                Name = "John",
+                Guid = Guid.NewGuid(),
+                Created = DateTime.Now
+            }
+        };
     }
 }
