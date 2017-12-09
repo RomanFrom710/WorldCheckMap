@@ -9,9 +9,12 @@ import reducers from './reducers';
 import routes from './routes';
 import Header from './components/header/Header';
 
+
 const history = createBrowserHistory();
 const routerEnhancer = applyMiddleware(routerMiddleware(history));
-const store = createStore(reducers, routerEnhancer);
+
+const store = createStore(reducers, window.INITIAL_STATE, routerEnhancer);
+window.INITIAL_STATE = undefined;
 
 export default class App extends Component {
     render() {

@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
     ComposableMap,
     ZoomableGroup,
@@ -9,12 +10,26 @@ import {
 import WorldMap from '../components/check-map/WorldMap';
 
 
-export default class CheckMap extends Component {
+const mapStateToProps = state => ({
+    countries: state.countries
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+class CheckMap extends Component {
     render() {
         return (
             <div>
+                {this.props.countries.toString()}
                 <WorldMap />
             </div>
         );
     }
 }
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CheckMap);

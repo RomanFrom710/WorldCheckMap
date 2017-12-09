@@ -7,11 +7,11 @@ import CheckMap from './containers/CheckMap';
 
 export default [
     {
-        path: '/',
-        component: MainPage
-    },
-    {
         path: '/map/:guid',
         component: CheckMap
+    },
+    {
+        path: '/',
+        component: MainPage
     }
 ]
