@@ -2,9 +2,9 @@
 {
     public enum CountryStatus
     {
-        None,
-        Wish,
-        Been,
-        Lived
+        None = 0,
+        Wish = 1,
+        Been = 2,
+        Lived = 3
     }
 }

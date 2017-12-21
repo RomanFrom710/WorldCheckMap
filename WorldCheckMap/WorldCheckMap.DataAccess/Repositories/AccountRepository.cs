@@ -23,5 +23,17 @@ namespace WorldCheckMap.DataAccess.Repositories
         {
             return _context.Accounts.Find(id);
         }
+
+        public int AddAccount(Account account)
+        {
+            _context.Accounts.Add(account);
+            _context.SaveChanges();
+            return account.Id;
+        }
+
+        public void UpsertCountryState(Guid guid, CountryState countryState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

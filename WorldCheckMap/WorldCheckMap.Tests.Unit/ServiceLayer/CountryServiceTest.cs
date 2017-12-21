@@ -28,7 +28,7 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
             var service = new CountryService(repository, mapper);
 
             var countries = service.GetCountries().ToList();
-            var sourceCountries = TestData.CountryDtos;
+            var sourceCountries = TestData.GetCountryDtos();
             
             var areSame = countries.IsEqual(sourceCountries);
             Assert.IsTrue(areSame);

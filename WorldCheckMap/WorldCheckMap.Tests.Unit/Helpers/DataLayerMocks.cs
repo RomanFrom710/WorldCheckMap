@@ -11,14 +11,14 @@ namespace WorldCheckMap.Tests.Unit.Helpers
         internal static ICountriesStorage GetCountryStorageMock()
         {
             var mock = new Mock<ICountriesStorage>();
-            mock.Setup(cs => cs.GetCountries()).Returns(new List<Country>(TestData.Countries));
+            mock.Setup(cs => cs.GetCountries()).Returns(new List<Country>(TestData.GetCountries()));
             return mock.Object;
         }
 
         internal static ICountryRepository GetCountryRepositoryMock()
         {
             var mock = new Mock<ICountryRepository>();
-            mock.Setup(cs => cs.GetCountries()).Returns(new List<Country>(TestData.Countries));
+            mock.Setup(cs => cs.GetCountries()).Returns(new List<Country>(TestData.GetCountries()));
             return mock.Object;
         }
     }

@@ -12,7 +12,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
     {
         private void InitializeDb(WorldCheckMapContext db)
         {
-            db.Countries.AddRange(TestData.Countries);
+            db.Countries.AddRange(TestData.GetCountries());
             db.SaveChanges();
         }
 
@@ -37,7 +37,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 var repository = new CountryRepository(db);
 
                 var countries = repository.GetCountries().ToList();
-                var sourceCountries = TestData.Countries;
+                var sourceCountries = TestData.GetCountries();
 
                 var areSame = countries.IsEqual(sourceCountries);
                 Assert.IsTrue(areSame);

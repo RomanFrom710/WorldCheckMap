@@ -36,7 +36,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         public void EqualityTest()
         {
             var countries = GetCountriesFromInitializer();
-            var sourceCountries = TestData.Countries;
+            var sourceCountries = TestData.GetCountries();
 
             var areSame = countries.IsEqual(sourceCountries);
             Assert.IsTrue(areSame);
