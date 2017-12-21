@@ -14,12 +14,12 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
         {
             var obj1 = GetTestObject();
             var obj2 = CopyTestObject(obj1);
-            Assert.IsTrue(obj1.IsEqual(obj2));
-            Assert.IsTrue(obj2.IsEqual(obj1));
+            Assert.IsTrue(obj1.IsEqual(obj2), "IsEqual should return true for the same objects");
+            Assert.IsTrue(obj2.IsEqual(obj1), "IsEqual should return true for the same objects");
 
             obj2 = GetTestObject();
-            Assert.IsFalse(obj1.IsEqual(obj2));
-            Assert.IsFalse(obj2.IsEqual(obj1));
+            Assert.IsFalse(obj1.IsEqual(obj2), "IsEqual should return false for not the same objects");
+            Assert.IsFalse(obj2.IsEqual(obj1), "IsEqual should return false for not the same objects");
         }
 
         [TestMethod]
@@ -27,14 +27,14 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
         {
             var col1 = new List<TestClass> { GetTestObject(), GetTestObject() };
             var col2 = new List<TestClass> { CopyTestObject(col1[1]), CopyTestObject(col1[0]) };
-            Assert.IsTrue(col1.IsEqual(col2));
-            Assert.IsTrue(col2.IsEqual(col1));
+            Assert.IsTrue(col1.IsEqual(col2), "IsEqual should return true for the same collections");
+            Assert.IsTrue(col2.IsEqual(col1), "IsEqual should return true for the same collections");
 
             col2.Add(GetTestObject());
-            Assert.IsFalse(col2.IsEqual(col1));
+            Assert.IsFalse(col2.IsEqual(col1), "IsEqual should return false for the collections of different sizes");
 
             var col3 = new List<TestClass> { CopyTestObject(col1[1]), CopyTestObject(col1[1]) };
-            Assert.IsFalse(col3.IsEqual(col1));
+            Assert.IsFalse(col3.IsEqual(col1), "IsEqual should ignore order of elements in the collections");
         }
 
         [TestMethod]
@@ -42,10 +42,10 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
         {
             var testModel1 = new TestModel{ Id = 1, Number = 1 };
             var testModel2 = new TestModel{ Id = 2, Number = 1 };
-            Assert.IsTrue(testModel1.IsEqual(testModel2));
+            Assert.IsTrue(testModel1.IsEqual(testModel2), "IsEqual should ignore Id properties");
             
             var testModel3 = new TestModel{ Id = 2, Number = 2 };
-            Assert.IsFalse(testModel1.IsEqual(testModel3));
+            Assert.IsFalse(testModel1.IsEqual(testModel3), "IsEqual should compare the rest of properties even if it meets Id property");
         }
 
         [TestMethod]
@@ -61,10 +61,10 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
                 new TestModel { Id = 0, Number = 1 },
                 new TestModel { Id = 0, Number = 2 }
             };
-            Assert.IsTrue(col1.IsEqual(col2));
+            Assert.IsTrue(col1.IsEqual(col2), "IsEqual should ignore Id properties in the collections");
 
             col2[0].Number = 2;
-            Assert.IsFalse(col1.IsEqual(col2));
+            Assert.IsFalse(col1.IsEqual(col2), "IsEqual should compare the rest of the properties in the colleciton even if it meets Id property");
         }
 
 
