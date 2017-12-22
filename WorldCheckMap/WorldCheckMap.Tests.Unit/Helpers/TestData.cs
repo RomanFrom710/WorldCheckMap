@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services.Dto;
 
@@ -12,9 +13,9 @@ namespace WorldCheckMap.Tests.Unit.Helpers
         {
             return new List<Country>
             {
-                new Country { Code = "BLR", Name = "Belarus" },
-                new Country { Code = "CAF", Name = "Central African Republic" },
-                new Country { Code = "ZWE", Name = "Zimbabwe" }
+                new Country { Id = 1, Code = "BLR", Name = "Belarus" },
+                new Country { Id = 2, Code = "CAF", Name = "Central African Republic" },
+                new Country { Id = 3, Code = "ZWE", Name = "Zimbabwe" }
             };
         }
 
@@ -35,15 +36,59 @@ namespace WorldCheckMap.Tests.Unit.Helpers
             {
                 new Account
                 {
+                    Id = 1,
                     Name = "Roman",
                     Guid = Guid.NewGuid(),
-                    Created = DateTime.Now.AddDays(-7)
+                    Created = DateTime.Now.AddDays(-7),
+                    States = new List<CountryState>
+                    {
+                        new CountryState
+                        {
+                            AccountId = 1,
+                            CountryId = 1,
+                            Status = CountryStatus.None
+                        },
+                        new CountryState
+                        {
+                            AccountId = 1,
+                            CountryId = 2,
+                            Status = CountryStatus.Been
+                        },
+                        new CountryState
+                        {
+                            AccountId = 1,
+                            CountryId = 3,
+                            Status = CountryStatus.Lived
+                        }
+                    }
                 },
                 new Account
                 {
+                    Id = 2,
                     Name = "John",
                     Guid = Guid.NewGuid(),
-                    Created = DateTime.Now
+                    Created = DateTime.Now,
+                    States = new List<CountryState>
+                    {
+                        new CountryState
+                        {
+                            AccountId = 2,
+                            CountryId = 1,
+                            Status = CountryStatus.Been
+                        },
+                        new CountryState
+                        {
+                            AccountId = 2,
+                            CountryId = 2,
+                            Status = CountryStatus.Wish
+                        },
+                        new CountryState
+                        {
+                            AccountId = 2,
+                            CountryId = 3,
+                            Status = CountryStatus.None
+                        }
+                    }
                 }
             };
         }

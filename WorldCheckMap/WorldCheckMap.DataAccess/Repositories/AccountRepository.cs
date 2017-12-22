@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
@@ -31,9 +32,27 @@ namespace WorldCheckMap.DataAccess.Repositories
             return account.Id;
         }
 
-        public void UpsertCountryState(Guid guid, CountryState countryState)
+        public void UpsertCountryState(Guid accountGuid, CountryState countryState)
         {
-            throw new NotImplementedException();
+            var account = GetAccount(accountGuid);
+            if (account == null)
+            {
+                return;
+            }
+
+            if (account.States == null)
+            {
+                account.States = new List<CountryState>();
+            }
+
+            var state = account.States.FirstOrDefault(c => c.CountryId == countryState.CountryId) ?? new CountryState
+            {
+                AccountId = account.Id,
+                CountryId = countryState.CountryId
+            };
+
+            state.Status = countryState.Status;
+            _context.SaveChanges();
         }
     }
 }

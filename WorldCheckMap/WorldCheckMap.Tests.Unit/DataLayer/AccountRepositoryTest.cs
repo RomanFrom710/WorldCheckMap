@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess;
+using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories;
 using WorldCheckMap.Tests.Unit.Helpers;
@@ -12,14 +14,6 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
     [TestClass]
     public class AccountRepositoryTest
     {
-        private List<Account> InitializeDb(WorldCheckMapContext db)
-        {
-            var testAccounts = TestData.GetAccounts();
-            db.Accounts.AddRange(testAccounts);
-            db.SaveChanges();
-            return testAccounts;
-        }
-
         [TestMethod]
         public void GetAccountTest()
         {
@@ -60,6 +54,83 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
 
                 Assert.AreEqual(accountId, foundAccount.Id);
             }
+        }
+
+        [TestMethod]
+        public void AddCountryStateTest()
+        {
+            using (var db = DbContextBuilder.GetContext())
+            {
+                var repository = new AccountRepository(db);
+
+                var testAccount = InitializeDbWithoutCountyStates(db)[0];
+                var testCountries = TestData.GetCountries();
+
+                var countryState = new CountryState
+                {
+                    CountryId = testCountries[0].Id,
+                    AccountId = testAccount.Id,
+                    Status = CountryStatus.Been
+                };
+
+                repository.UpsertCountryState(testAccount.Guid, countryState);
+
+                var states = db.Accounts.Find(testAccount.Id).States;
+                Assert.AreEqual(states.Count, 1);
+                Assert.AreEqual(states.First().Status, countryState.Status);
+            }
+        }
+
+        [TestMethod]
+        public void UpdateCountryStateTest()
+        {
+            using (var db = DbContextBuilder.GetContext())
+            {
+                var repository = new AccountRepository(db);
+
+                var testAccount = InitializeDb(db)[0];
+                var testState = testAccount.States.First();
+
+                var otherStatus = Enum.GetValues(typeof(CountryStatus)).Cast<CountryStatus>()
+                    .First(s => s != testState.Status);
+
+                var oldStatesCount = testAccount.States.Count;
+
+                var countryState = new CountryState
+                {
+                    CountryId = testState.CountryId,
+                    AccountId = testAccount.Id,
+                    Status = otherStatus
+                };
+
+                repository.UpsertCountryState(testAccount.Guid, countryState);
+
+                var states = db.Accounts.Find(testAccount.Id).States;
+                Assert.AreEqual(states.Count, oldStatesCount);
+
+                var foundState = states.First(s => s.CountryId == testState.CountryId);
+                Assert.AreEqual(foundState.Status, otherStatus);
+            }
+        }
+
+        private List<Account> InitializeDb(WorldCheckMapContext db)
+        {
+            var testAccounts = TestData.GetAccounts();
+            db.Accounts.AddRange(testAccounts);
+            db.SaveChanges();
+            return testAccounts;
+        }
+
+        private List<Account> InitializeDbWithoutCountyStates(WorldCheckMapContext db)
+        {
+            var testAccounts = TestData.GetAccounts().Select(a =>
+            {
+                a.States = null;
+                return a;
+            }).ToList();
+            db.Accounts.AddRange(testAccounts);
+            db.SaveChanges();
+            return testAccounts;
         }
     }
 }
