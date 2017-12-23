@@ -45,11 +45,16 @@ namespace WorldCheckMap.DataAccess.Repositories
                 account.States = new List<CountryState>();
             }
 
-            var state = account.States.FirstOrDefault(c => c.CountryId == countryState.CountryId) ?? new CountryState
+            var state = account.States.FirstOrDefault(c => c.CountryId == countryState.CountryId);
+            if (state == null)
             {
-                AccountId = account.Id,
-                CountryId = countryState.CountryId
-            };
+                state = new CountryState
+                {
+                    AccountId = account.Id,
+                    CountryId = countryState.CountryId
+                };
+                account.States.Add(state);
+            }
 
             state.Status = countryState.Status;
             _context.SaveChanges();
