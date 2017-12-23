@@ -47,12 +47,12 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 var accountId = repository.AddAccount(account);
 
                 var dbAccounts = db.Accounts.ToList();
-                Assert.AreEqual(dbAccounts.Count, 1);
+                Assert.AreEqual(1, dbAccounts.Count);
 
                 var foundAccount = dbAccounts.First();
                 Assert.IsTrue(account.IsEqual(foundAccount));
 
-                Assert.AreEqual(accountId, foundAccount.Id);
+                Assert.AreEqual(foundAccount.Id, accountId);
             }
         }
 
@@ -76,8 +76,8 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 repository.UpsertCountryState(testAccount.Guid, countryState);
 
                 var states = db.Accounts.Find(testAccount.Id).States;
-                Assert.AreEqual(states.Count, 1);
-                Assert.AreEqual(states.First().Status, countryState.Status);
+                Assert.AreEqual(1, states.Count);
+                Assert.AreEqual(countryState.Status, states.First().Status);
             }
         }
 
@@ -106,10 +106,10 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 repository.UpsertCountryState(testAccount.Guid, countryState);
 
                 var states = db.Accounts.Find(testAccount.Id).States;
-                Assert.AreEqual(states.Count, oldStatesCount);
+                Assert.AreEqual(oldStatesCount, states.Count);
 
                 var foundState = states.First(s => s.CountryId == testState.CountryId);
-                Assert.AreEqual(foundState.Status, otherStatus);
+                Assert.AreEqual(otherStatus, foundState.Status);
             }
         }
 

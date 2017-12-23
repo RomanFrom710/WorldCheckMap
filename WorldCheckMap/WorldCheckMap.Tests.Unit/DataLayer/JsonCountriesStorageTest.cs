@@ -14,7 +14,6 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
             var storage = new JsonCountriesStorage();
             var countries = storage.GetCountries();
             Assert.IsNotNull(countries);
-            Assert.IsInstanceOfType(countries, typeof(IEnumerable<Country>));
             Assert.IsTrue(countries.Count > 0);
         }
 
@@ -23,7 +22,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         {
             var storage = new JsonCountriesStorage();
             var countries = storage.GetCountries();
-            Assert.AreEqual(countries.Count, 180);
+            Assert.AreEqual(180, countries.Count);
         }
 
         [TestMethod]
@@ -33,8 +32,8 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
             var countries = storage.GetCountries();
             var belarus = countries.Find(c => c.Name == "Belarus");
             var uk = countries.Find(c => c.Name == "United Kingdom");
-            Assert.AreEqual(belarus.Code, "BLR");
-            Assert.AreEqual(uk.Code, "GBR");
+            Assert.AreEqual("BLR", belarus.Code);
+            Assert.AreEqual("GBR", uk.Code);
         }
     }
 }
