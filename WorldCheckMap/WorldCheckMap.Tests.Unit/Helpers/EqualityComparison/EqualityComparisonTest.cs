@@ -61,10 +61,29 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
                 new TestModel { Id = 0, Number = 1 },
                 new TestModel { Id = 0, Number = 2 }
             };
+
             Assert.IsTrue(col1.IsEqual(col2), "IsEqual should ignore Id properties in the collections");
 
             col2[0].Number = 2;
             Assert.IsFalse(col1.IsEqual(col2), "IsEqual should compare the rest of the properties in the colleciton even if it meets Id property");
+        }
+
+        [TestMethod]
+        public void IgnoreCollectionTypesTest()
+        {
+            var model1 = new TestModel
+            {
+                Collection = new List<int> { 1, 2 }
+            };
+            var model2 = new TestModel
+            {
+                Collection = new HashSet<int> { 1, 2 }
+            };
+
+            Assert.IsTrue(model1.IsEqual(model2), "IsEqual should ignore collection types");
+
+            model1.Collection.Add(3);
+            Assert.IsFalse(model1.IsEqual(model2), "IsEqual should return false for collections with different content");
         }
 
 
@@ -107,6 +126,8 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
             public int Id { get; set; }
 
             public int Number { get; set; }
+
+            public ICollection<int> Collection { get; set; }
         }
 
         #endregion

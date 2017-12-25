@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Initialization;
-using WorldCheckMap.DataAccess.Models;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
 {

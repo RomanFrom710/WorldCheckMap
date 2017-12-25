@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Initialization;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Tests.Unit.Helpers;
+using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
 using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
@@ -13,7 +14,8 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
     {
         private List<Country> GetCountriesFromInitializer()
         {
-            using (var db = DbContextBuilder.GetContext())
+            var contextFactory = new DbContextFactory();
+            using (var db = contextFactory.GetContext())
             {
                 var storage = DataLayerMocks.GetCountryStorageMock();
                 var initializer = new WorldCheckMapInitializer(db, storage);

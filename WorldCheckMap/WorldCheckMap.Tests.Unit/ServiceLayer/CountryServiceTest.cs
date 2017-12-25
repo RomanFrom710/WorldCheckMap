@@ -2,7 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Services;
 using WorldCheckMap.Tests.Unit.Helpers;
+using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
 using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Helpers.ServiceLayer;
 
 namespace WorldCheckMap.Tests.Unit.ServiceLayer
 {

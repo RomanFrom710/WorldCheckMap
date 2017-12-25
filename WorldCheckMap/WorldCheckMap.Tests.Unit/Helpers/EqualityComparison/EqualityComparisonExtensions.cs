@@ -8,6 +8,7 @@ namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
         private static readonly ICompareLogic Comparer = new CompareLogic(new ComparisonConfig
         {
             IgnoreCollectionOrder = true,
+            IgnoreObjectTypes = true, // Need to compare different implementations of navigation ICollection property
             MembersToIgnore = new List<string> { "Id" }
         });
 

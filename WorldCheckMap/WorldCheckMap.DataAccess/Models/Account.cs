@@ -13,6 +13,6 @@ namespace WorldCheckMap.DataAccess.Models
 
         public DateTime Created { get; set; }
 
-        public virtual ICollection<CountryState> States { get; set; }
+        public virtual ICollection<CountryState> CountryStates { get; set; }
     }
 }

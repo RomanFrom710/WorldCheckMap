@@ -40,7 +40,7 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     Name = "Roman",
                     Guid = Guid.NewGuid(),
                     Created = DateTime.Now.AddDays(-7),
-                    States = new List<CountryState>
+                    CountryStates = new List<CountryState>
                     {
                         new CountryState
                         {
@@ -68,7 +68,7 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     Name = "John",
                     Guid = Guid.NewGuid(),
                     Created = DateTime.Now,
-                    States = new List<CountryState>
+                    CountryStates = new List<CountryState>
                     {
                         new CountryState
                         {

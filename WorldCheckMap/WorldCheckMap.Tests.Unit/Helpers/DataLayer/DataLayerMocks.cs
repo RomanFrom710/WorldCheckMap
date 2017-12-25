@@ -4,7 +4,7 @@ using WorldCheckMap.DataAccess.Initialization.Interfaces;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
 
-namespace WorldCheckMap.Tests.Unit.Helpers
+namespace WorldCheckMap.Tests.Unit.Helpers.DataLayer
 {
     internal static class DataLayerMocks
     {

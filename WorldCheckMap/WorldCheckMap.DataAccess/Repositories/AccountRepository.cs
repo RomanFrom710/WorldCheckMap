@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
 
@@ -17,12 +18,18 @@ namespace WorldCheckMap.DataAccess.Repositories
 
         public Account GetAccount(Guid guid)
         {
-            return _context.Accounts.FirstOrDefault(a => a.Guid == guid);
+            return _context
+                .Accounts
+                .Include(a => a.CountryStates)
+                .FirstOrDefault(a => a.Guid == guid);
         }
 
         public Account GetAccount(int id)
         {
-            return _context.Accounts.Find(id);
+            return _context
+                .Accounts
+                .Include(a => a.CountryStates)
+                .FirstOrDefault(a => a.Id == id);
         }
 
         public int AddAccount(Account account)
@@ -40,23 +47,18 @@ namespace WorldCheckMap.DataAccess.Repositories
                 return;
             }
 
-            if (account.States == null)
-            {
-                account.States = new List<CountryState>();
-            }
+            var state = _context.CountryStates.FirstOrDefault(s =>
+                s.AccountId == account.Id && s.CountryId == countryState.CountryId);
 
-            var state = account.States.FirstOrDefault(c => c.CountryId == countryState.CountryId);
             if (state == null)
             {
-                state = new CountryState
-                {
-                    AccountId = account.Id,
-                    CountryId = countryState.CountryId
-                };
-                account.States.Add(state);
+                _context.CountryStates.Add(countryState);
+            }
+            else
+            {
+                state.Status = countryState.Status;
             }
 
-            state.Status = countryState.Status;
             _context.SaveChanges();
         }
     }
