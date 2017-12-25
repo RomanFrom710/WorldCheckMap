@@ -44,18 +44,21 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     {
                         new CountryState
                         {
+                            Id = 1,
                             AccountId = 1,
                             CountryId = 1,
                             Status = CountryStatus.None
                         },
                         new CountryState
                         {
+                            Id = 2,
                             AccountId = 1,
                             CountryId = 2,
                             Status = CountryStatus.Been
                         },
                         new CountryState
                         {
+                            Id = 3,
                             AccountId = 1,
                             CountryId = 3,
                             Status = CountryStatus.Lived
@@ -72,18 +75,21 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     {
                         new CountryState
                         {
+                            Id = 4,
                             AccountId = 2,
                             CountryId = 1,
                             Status = CountryStatus.Been
                         },
                         new CountryState
                         {
+                            Id = 5,
                             AccountId = 2,
                             CountryId = 2,
                             Status = CountryStatus.Wish
                         },
                         new CountryState
                         {
+                            Id = 6,
                             AccountId = 2,
                             CountryId = 3,
                             Status = CountryStatus.None
@@ -91,6 +97,23 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     }
                 }
             };
+        }
+
+        internal static List<AccountDto> GetAccountDtos()
+        {
+            return GetAccounts().Select(a => new AccountDto
+            {
+                Id = a.Id,
+                Name = a.Name,
+                Guid = a.Guid,
+                Created = a.Created,
+                CountryStates = a.CountryStates.Select(cs => new CountryStateDto
+                {
+                    Id = cs.Id,
+                    CountryId = cs.CountryId,
+                    Status = cs.Status
+                }).ToList()
+            }).ToList();
         }
     }
 }
