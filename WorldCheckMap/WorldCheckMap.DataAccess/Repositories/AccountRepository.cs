@@ -39,7 +39,7 @@ namespace WorldCheckMap.DataAccess.Repositories
             return account.Id;
         }
 
-        public void UpsertCountryState(Guid accountGuid, CountryState countryState)
+        public void UpdateCountryState(Guid accountGuid, CountryState countryState)
         {
             var account = GetAccount(accountGuid);
             if (account == null)

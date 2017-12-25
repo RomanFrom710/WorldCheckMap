@@ -10,6 +10,6 @@ namespace WorldCheckMap.DataAccess.Repositories.Interfaces
 
         int AddAccount(Account account);
 
-        void UpsertCountryState(Guid guid, CountryState countryState);
+        void UpdateCountryState(Guid guid, CountryState countryState);
     }
 }

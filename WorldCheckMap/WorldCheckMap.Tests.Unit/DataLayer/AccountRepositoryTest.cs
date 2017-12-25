@@ -90,7 +90,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                     Status = CountryStatus.Been
                 };
 
-                repository.UpsertCountryState(testAccount.Guid, countryState);
+                repository.UpdateCountryState(testAccount.Guid, countryState);
 
                 var states = db.Accounts.Find(testAccount.Id).CountryStates;
                 Assert.AreEqual(1, states.Count);
@@ -121,7 +121,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                     Status = otherStatus
                 };
 
-                repository.UpsertCountryState(testAccount.Guid, countryState);
+                repository.UpdateCountryState(testAccount.Guid, countryState);
 
                 var states = db.Accounts.Find(testAccount.Id).CountryStates;
                 Assert.AreEqual(oldStatesCount, states.Count);
