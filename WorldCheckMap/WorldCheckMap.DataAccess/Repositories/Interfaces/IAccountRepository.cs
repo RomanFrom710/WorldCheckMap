@@ -1,4 +1,5 @@
 ﻿using System;
+using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 
 namespace WorldCheckMap.DataAccess.Repositories.Interfaces
@@ -10,6 +11,6 @@ namespace WorldCheckMap.DataAccess.Repositories.Interfaces
 
         int AddAccount(Account account);
 
-        void UpdateCountryState(Guid guid, CountryState countryState);
+        void UpdateCountryState(Guid accountGuid, int countryId, CountryStatus countryStatus);
     }
 }

@@ -83,19 +83,15 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 db.Accounts.Add(testAccount);
             }, (db, repository) =>
             {
-                var countryState = new CountryState
-                {
-                    CountryId = testCountry.Id,
-                    AccountId = testAccount.Id,
-                    Status = CountryStatus.Been
-                };
+                const CountryStatus countryStatus = CountryStatus.Been;
+                var countryId = testCountry.Id;
 
-                repository.UpdateCountryState(testAccount.Guid, countryState);
+                repository.UpdateCountryState(testAccount.Guid, countryId, countryStatus);
 
                 var states = db.Accounts.Find(testAccount.Id).CountryStates;
                 Assert.AreEqual(1, states.Count);
-                Assert.AreEqual(countryState.CountryId, states.First().CountryId);
-                Assert.AreEqual(countryState.Status, states.First().Status);
+                Assert.AreEqual(countryId, states.First().CountryId);
+                Assert.AreEqual(countryStatus, states.First().Status);
             });
         }
 
@@ -114,14 +110,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
             {
                 var oldStatesCount = testAccount.CountryStates.Count;
 
-                var countryState = new CountryState
-                {
-                    CountryId = testState.CountryId,
-                    AccountId = testAccount.Id,
-                    Status = otherStatus
-                };
-
-                repository.UpdateCountryState(testAccount.Guid, countryState);
+                repository.UpdateCountryState(testAccount.Guid, testState.CountryId, otherStatus);
 
                 var states = db.Accounts.Find(testAccount.Id).CountryStates;
                 Assert.AreEqual(oldStatesCount, states.Count);

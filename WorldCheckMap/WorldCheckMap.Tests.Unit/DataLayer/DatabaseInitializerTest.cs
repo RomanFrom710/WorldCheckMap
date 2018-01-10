@@ -17,7 +17,7 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
             var contextFactory = new DbContextFactory();
             using (var db = contextFactory.GetContext())
             {
-                var storage = DataLayerMocks.GetCountryStorageMock();
+                var storage = DataLayerMocks.GetCountryStorageMock().Object;
                 var initializer = new WorldCheckMapInitializer(db, storage);
                 initializer.InitializeDatabase();
 

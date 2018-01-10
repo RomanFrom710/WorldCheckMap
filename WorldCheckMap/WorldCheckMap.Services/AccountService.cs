@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
 using WorldCheckMap.Services.Commands;
 using WorldCheckMap.Services.Dto;
@@ -35,12 +36,18 @@ namespace WorldCheckMap.Services
 
         public int AddAccount(AddAccountCommand command)
         {
-            throw new NotImplementedException();
+            var account = new Account
+            {
+                Name = command.Name,
+                Guid = Guid.NewGuid(),
+                Created = DateTime.UtcNow
+            };
+            return _repository.AddAccount(account);
         }
 
         public void UpdateCountryState(UpdateCountryStateCommand command)
         {
-            throw new NotImplementedException();
+            _repository.UpdateCountryState(command.AccountGuid, command.CountryId, command.CountryStatus);
         }
     }
 }

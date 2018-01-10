@@ -14,7 +14,7 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
         [TestMethod]
         public void SmokeTest()
         {
-            var repository = DataLayerMocks.GetCountryRepositoryMock();
+            var repository = DataLayerMocks.GetCountryRepositoryMock().Object;
             var mapper = ServiceLayerMocks.GetMapperMock();
             var service = new CountryService(repository, mapper);
             
@@ -25,7 +25,7 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
         [TestMethod]
         public void EqualityTest()
         {
-            var repository = DataLayerMocks.GetCountryRepositoryMock();
+            var repository = DataLayerMocks.GetCountryRepositoryMock().Object;
             var mapper = ServiceLayerMocks.GetMapperMock();
             var service = new CountryService(repository, mapper);
 

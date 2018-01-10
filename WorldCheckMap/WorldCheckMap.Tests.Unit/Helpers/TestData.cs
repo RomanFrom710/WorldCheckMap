@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
+using WorldCheckMap.Services.Commands;
 using WorldCheckMap.Services.Dto;
 
 namespace WorldCheckMap.Tests.Unit.Helpers
@@ -32,7 +33,7 @@ namespace WorldCheckMap.Tests.Unit.Helpers
 
         internal static List<Account> GetAccounts()
         {
-            return new List < Account >
+            return new List<Account>
             {
                 new Account
                 {
@@ -114,6 +115,24 @@ namespace WorldCheckMap.Tests.Unit.Helpers
                     Status = cs.Status
                 }).ToList()
             }).ToList();
+        }
+
+        internal static List<AddAccountCommand> GetAddAccountCommands()
+        {
+            return GetAccounts()
+                .Select(a => new AddAccountCommand { Name = a.Name })
+                .ToList();
+        }
+
+        internal static List<UpdateCountryStateCommand> GetUpdateCountryStateCommands(Account account)
+        {
+            return account.CountryStates.Select(cs => new UpdateCountryStateCommand
+                {
+                    AccountGuid = account.Guid,
+                    CountryId = cs.CountryId,
+                    CountryStatus = cs.Status
+                })
+                .ToList();
         }
     }
 }

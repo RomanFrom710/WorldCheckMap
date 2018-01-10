@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
 
@@ -39,7 +40,7 @@ namespace WorldCheckMap.DataAccess.Repositories
             return account.Id;
         }
 
-        public void UpdateCountryState(Guid accountGuid, CountryState countryState)
+        public void UpdateCountryState(Guid accountGuid, int countryId, CountryStatus countryStatus)
         {
             var account = GetAccount(accountGuid);
             if (account == null)
@@ -48,15 +49,20 @@ namespace WorldCheckMap.DataAccess.Repositories
             }
 
             var state = _context.CountryStates.FirstOrDefault(s =>
-                s.AccountId == account.Id && s.CountryId == countryState.CountryId);
+                s.AccountId == account.Id && s.CountryId == countryId);
 
             if (state == null)
             {
-                _context.CountryStates.Add(countryState);
+                _context.CountryStates.Add(new CountryState
+                {
+                    AccountId = account.Id,
+                    CountryId = countryId,
+                    Status = countryStatus
+                });
             }
             else
             {
-                state.Status = countryState.Status;
+                state.Status = countryStatus;
             }
 
             _context.SaveChanges();
