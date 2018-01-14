@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using KellermanSoftware.CompareNetObjects;
 
-namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
+namespace WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison
 {
     internal static class EqualityComparisonExtensions
     {

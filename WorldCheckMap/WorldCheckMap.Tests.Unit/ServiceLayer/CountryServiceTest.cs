@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Services;
-using WorldCheckMap.Tests.Unit.Helpers;
-using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
-using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
-using WorldCheckMap.Tests.Unit.Helpers.ServiceLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
+using WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer;
 
 namespace WorldCheckMap.Tests.Unit.ServiceLayer
 {

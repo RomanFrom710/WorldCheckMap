@@ -3,7 +3,7 @@ using Moq;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services.Dto;
 
-namespace WorldCheckMap.Tests.Unit.Helpers.ServiceLayer
+namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
 {
     internal static class ServiceLayerMocks
     {

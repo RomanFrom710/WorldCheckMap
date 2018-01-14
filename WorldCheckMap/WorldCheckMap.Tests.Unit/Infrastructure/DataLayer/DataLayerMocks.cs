@@ -6,8 +6,9 @@ using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Initialization.Interfaces;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 
-namespace WorldCheckMap.Tests.Unit.Helpers.DataLayer
+namespace WorldCheckMap.Tests.Unit.Infrastructure.DataLayer
 {
     internal static class DataLayerMocks
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace WorldCheckMap.Tests.Unit.Helpers.EqualityComparison
+namespace WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison
 {
     [TestClass]
     public class EqualityComparisonTest

@@ -3,9 +3,10 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Initialization;
 using WorldCheckMap.DataAccess.Models;
-using WorldCheckMap.Tests.Unit.Helpers;
-using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
-using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer.ContextFactory;
+using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
 {

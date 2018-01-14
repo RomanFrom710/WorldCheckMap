@@ -1,26 +1,23 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Repositories;
-using WorldCheckMap.Tests.Unit.Helpers;
-using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
-using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
 {
     [TestClass]
     public class CountryRepositoryTest
     {
-        private readonly RepositoryTestRunner<CountryRepository> _testRunner =
-            new RepositoryTestRunner<CountryRepository>(db => new CountryRepository(db));
+        private readonly RepositoryTestRunner _testRunner = new RepositoryTestRunner(new CountriesInitializer());
 
         [TestMethod]
         public void SmokeTest()
         {
-            var testCountries = TestData.GetCountries();
             _testRunner.RunTest(db =>
             {
-                db.Countries.AddRange(testCountries);
-            }, (db, repository) => {
+                var repository = new CountryRepository(db);
                 var countries = repository.GetCountries();
                 Assert.IsNotNull(countries);
             });
@@ -29,14 +26,12 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         [TestMethod]
         public void EqualityTest()
         {
-            var testCountries = TestData.GetCountries();
             _testRunner.RunTest(db =>
             {
-                db.Countries.AddRange(testCountries);
-            }, (db, repository) => {
-                var countries = repository.GetCountries().ToList();
-                var areSame = countries.IsEqual(testCountries);
-                Assert.IsTrue(areSame);
+                var repository = new CountryRepository(db);
+                var dbCountries = db.Countries.ToList();
+                var repositoryCountries = repository.GetCountries();
+                Assert.IsTrue(dbCountries.IsEqual(repositoryCountries));
             });
         }
     }

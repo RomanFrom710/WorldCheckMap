@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WorldCheckMap.DataAccess;
 
-namespace WorldCheckMap.Tests.Unit.Helpers.DataLayer
+namespace WorldCheckMap.Tests.Unit.Infrastructure.DataLayer.ContextFactory
 {
-    internal class DbContextFactory
+    internal class DbContextFactory : IDbContextFactory
     {
         private static int _dbCounter;
         private readonly int _currentDbNumber;
@@ -13,7 +13,7 @@ namespace WorldCheckMap.Tests.Unit.Helpers.DataLayer
             _currentDbNumber = _dbCounter++;
         }
 
-        internal WorldCheckMapContext GetContext()
+        public WorldCheckMapContext GetContext()
         {
             var options = new DbContextOptionsBuilder<WorldCheckMapContext>()
                 .UseInMemoryDatabase($"WorldCheckMapTests{_currentDbNumber}")

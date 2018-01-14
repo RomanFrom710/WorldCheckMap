@@ -1,36 +1,37 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WorldCheckMap.DataAccess;
 using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories;
-using WorldCheckMap.Tests.Unit.Helpers;
-using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
-using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
 {
     [TestClass]
     public class AccountRepositoryTest
     {
-        private readonly RepositoryTestRunner<AccountRepository> _testRunner =
-            new RepositoryTestRunner<AccountRepository>(db => new AccountRepository(db));
+        private readonly RepositoryTestRunner _testRunner = new RepositoryTestRunner(new FullDataInitializer());
 
         [TestMethod]
         public void GetAccountByIdTest()
         {
-            var testAccount = TestData.GetAccounts().First();
             _testRunner.RunTest(db =>
             {
-                db.Accounts.Add(testAccount);
-            }, (db, repository) =>
-            {
+                var repository = new AccountRepository(db);
+                var testAccount = GetAccountWithCountryStates(db);
+
                 var accountById = repository.GetAccount(testAccount.Id);
                 Assert.IsNotNull(accountById);
                 var isEqualById = accountById.IsEqual(testAccount);
                 Assert.IsTrue(isEqualById);
 
-                var notFoundAccount = repository.GetAccount(testAccount.Id + 1);
+                var nonexistentId = db.Accounts.GetNonexistentId();
+                var notFoundAccount = repository.GetAccount(nonexistentId);
                 Assert.IsNull(notFoundAccount);
             });
         }
@@ -38,12 +39,11 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         [TestMethod]
         public void GetAccountByGuidTest()
         {
-            var testAccount = TestData.GetAccounts().First();
             _testRunner.RunTest(db =>
             {
-                db.Accounts.Add(testAccount);
-            }, (db, repository) =>
-            {
+                var repository = new AccountRepository(db);
+                var testAccount = GetAccountWithCountryStates(db);
+
                 var accountByGuid = repository.GetAccount(testAccount.Guid);
                 Assert.IsNotNull(accountByGuid);
                 var isEqualByGuid = accountByGuid.IsEqual(testAccount);
@@ -57,16 +57,21 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         [TestMethod]
         public void AddAccountTest()
         {
-            var testAccount = TestData.GetAccounts().First();
-            _testRunner.RunTest(db => { }, (db, repository) =>
+            _testRunner.RunTest(db =>
             {
-                var accountId = repository.AddAccount(testAccount);
-                var dbAccounts = db.Accounts.ToList();
-                Assert.AreEqual(1, dbAccounts.Count);
+                var repository = new AccountRepository(db);
+                var newAccount = TestData.GetAccounts().First();
+                newAccount.Guid = Guid.NewGuid();
+                newAccount.Name += "_new";
+                newAccount.CountryStates = null;
 
-                var foundAccount = dbAccounts.First();
-                Assert.IsTrue(testAccount.IsEqual(foundAccount));
+                var oldAccountsCount = db.Accounts.Count();
+                var accountId = repository.AddAccount(newAccount);
+                var newAccountsCount = db.Accounts.Count();
+                Assert.AreEqual(oldAccountsCount + 1, newAccountsCount);
 
+                var foundAccount = db.Accounts.Find(accountId);
+                Assert.IsTrue(newAccount.IsEqual(foundAccount));
                 Assert.AreEqual(foundAccount.Id, accountId);
             });
         }
@@ -74,15 +79,12 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         [TestMethod]
         public void AddCountryStateTest()
         {
-            var testCountry = TestData.GetCountries().First();
-            var testAccount = TestData.GetAccounts().First();
-            testAccount.CountryStates = null;
-
             _testRunner.RunTest(db =>
             {
-                db.Accounts.Add(testAccount);
-            }, (db, repository) =>
-            {
+                var repository = new AccountRepository(db);
+                var testAccount = GetAccountWithoutCountryStates(db);
+                var testCountry = db.Countries.First();
+
                 const CountryStatus countryStatus = CountryStatus.Been;
                 var countryId = testCountry.Id;
 
@@ -98,16 +100,15 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
         [TestMethod]
         public void UpdateCountryStateTest()
         {
-            var testAccount = TestData.GetAccounts().First();
-            var testState = testAccount.CountryStates.First();
-            var otherStatus = Enum.GetValues(typeof(CountryStatus)).Cast<CountryStatus>()
-                .First(s => s != testState.Status);
-
             _testRunner.RunTest(db =>
             {
-                db.Accounts.Add(testAccount);
-            }, (db, repository) =>
-            {
+                var repository = new AccountRepository(db);
+                var testAccount = GetAccountWithCountryStates(db);
+                var testState = testAccount.CountryStates.First();
+                var otherStatus = Enum.GetValues(typeof(CountryStatus))
+                    .Cast<CountryStatus>()
+                    .First(s => s != testState.Status);
+
                 var oldStatesCount = testAccount.CountryStates.Count;
 
                 repository.UpdateCountryState(testAccount.Guid, testState.CountryId, otherStatus);
@@ -119,5 +120,11 @@ namespace WorldCheckMap.Tests.Unit.DataLayer
                 Assert.AreEqual(otherStatus, foundState.Status);
             });
         }
+
+        private Account GetAccountWithCountryStates(WorldCheckMapContext db) =>
+            db.Accounts.Include(a => a.CountryStates).First(a => a.CountryStates != null && a.CountryStates.Any());
+
+        private Account GetAccountWithoutCountryStates(WorldCheckMapContext db) =>
+            db.Accounts.Include(a => a.CountryStates).First(a => a.CountryStates == null || !a.CountryStates.Any());
     }
 }

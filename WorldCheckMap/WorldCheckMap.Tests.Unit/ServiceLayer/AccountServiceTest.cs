@@ -6,10 +6,9 @@ using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services;
 using WorldCheckMap.Services.Commands;
-using WorldCheckMap.Tests.Unit.Helpers;
-using WorldCheckMap.Tests.Unit.Helpers.DataLayer;
-using WorldCheckMap.Tests.Unit.Helpers.EqualityComparison;
-using WorldCheckMap.Tests.Unit.Helpers.ServiceLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
+using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
+using WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer;
 
 namespace WorldCheckMap.Tests.Unit.ServiceLayer
 {
