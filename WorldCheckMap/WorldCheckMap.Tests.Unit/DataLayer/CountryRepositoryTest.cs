@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.DataAccess.Repositories;
 using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
-using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
 using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
+using WorldCheckMap.Tests.Common;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer
 {

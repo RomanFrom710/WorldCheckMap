@@ -9,7 +9,7 @@ namespace WorldCheckMap.Services.Interfaces
         AccountDto GetAccount(Guid guid);
         AccountDto GetAccount(int id);
 
-        int AddAccount(AddAccountCommand command);
+        AccountDto AddAccount(AddAccountCommand command);
 
         void UpdateCountryState(UpdateCountryStateCommand command);
     }

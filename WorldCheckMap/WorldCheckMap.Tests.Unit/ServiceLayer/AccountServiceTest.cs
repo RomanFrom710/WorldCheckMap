@@ -6,12 +6,13 @@ using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services;
 using WorldCheckMap.Services.Commands;
+using WorldCheckMap.Tests.Common;
 using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
-using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 using WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer;
 
 namespace WorldCheckMap.Tests.Unit.ServiceLayer
 {
+    [TestClass]
     public class AccountServiceTest
     {
         [TestMethod]
@@ -21,11 +22,12 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
             var mapper = ServiceLayerMocks.GetMapperMock();
             var service = new AccountService(repositoryMock.Object, mapper);
 
-            var accountId = TestData.GetAccounts().First().Id;
-            var account = service.GetAccount(accountId);
+            var accountId = 1;
+            var foundAccount = service.GetAccount(accountId);
 
             repositoryMock.Verify(ar => ar.GetAccount(It.Is((int id) => id == accountId)), Times.Once);
-            Assert.IsNotNull(account);
+            Assert.IsNotNull(foundAccount);
+            Assert.AreEqual(Guid.Empty, foundAccount.Guid, "GetAccount by Id shouldn't return account's guid");
         }
 
         [TestMethod]
@@ -35,11 +37,11 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
             var mapper = ServiceLayerMocks.GetMapperMock();
             var service = new AccountService(repositoryMock.Object, mapper);
 
-            var accountGuid = TestData.GetAccounts().First().Guid;
-            var account = service.GetAccount(accountGuid);
+            var accountGuid = Guid.NewGuid();
+            var foundAccount = service.GetAccount(accountGuid);
 
             repositoryMock.Verify(ar => ar.GetAccount(It.Is((Guid guid) => guid == accountGuid)), Times.Once);
-            Assert.IsNotNull(account);
+            Assert.IsNotNull(foundAccount);
         }
 
         [TestMethod]
@@ -50,10 +52,11 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
             var service = new AccountService(repositoryMock.Object, mapper);
 
             var addCommand = new AddAccountCommand { Name = "Roman" };
-            var accountId = service.AddAccount(addCommand);
+            var accountDto = service.AddAccount(addCommand);
 
             repositoryMock.Verify(ar => ar.AddAccount(It.Is((Account account) => account.Name == addCommand.Name)), Times.Once);
-            Assert.IsTrue(accountId > 0);
+            Assert.AreNotEqual(Guid.Empty, accountDto.Guid);
+            Assert.IsTrue(accountDto.Id > 0);
         }
 
         [TestMethod]

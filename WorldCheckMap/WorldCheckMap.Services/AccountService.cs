@@ -34,7 +34,7 @@ namespace WorldCheckMap.Services
             return accountDto;
         }
 
-        public int AddAccount(AddAccountCommand command)
+        public AccountDto AddAccount(AddAccountCommand command)
         {
             var account = new Account
             {
@@ -42,7 +42,14 @@ namespace WorldCheckMap.Services
                 Guid = Guid.NewGuid(),
                 Created = DateTime.UtcNow
             };
-            return _repository.AddAccount(account);
+
+            var id = _repository.AddAccount(account);
+            return new AccountDto
+            {
+                Id = id,
+                Guid = account.Guid,
+                Created = account.Created
+            };
         }
 
         public void UpdateCountryState(UpdateCountryStateCommand command)

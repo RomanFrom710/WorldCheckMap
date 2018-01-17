@@ -1,9 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WorldCheckMap.Services;
+using WorldCheckMap.Tests.Common;
 using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
-using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
-using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 using WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer;
 
 namespace WorldCheckMap.Tests.Unit.ServiceLayer

@@ -1,4 +1,5 @@
 ﻿using WorldCheckMap.DataAccess;
+using WorldCheckMap.Tests.Common;
 
 namespace WorldCheckMap.Tests.Unit.Infrastructure.Initializers
 {

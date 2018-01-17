@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WorldCheckMap.Tests.Common;
 
-namespace WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison
+namespace WorldCheckMap.Tests.Unit
 {
     [TestClass]
     public class EqualityComparisonTest

@@ -6,7 +6,7 @@ using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Initialization.Interfaces;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories.Interfaces;
-using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
+using WorldCheckMap.Tests.Common;
 
 namespace WorldCheckMap.Tests.Unit.Infrastructure.DataLayer
 {
@@ -34,16 +34,16 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.DataLayer
 
             mock
                 .Setup(ar => ar.GetAccount(It.IsAny<int>()))
-                .Returns((int id) => testAccounts.Find(a => a.Id == id))
+                .Returns((int id) => testAccounts.First())
                 .Verifiable();
             mock
                 .Setup(ar => ar.GetAccount(It.IsAny<Guid>()))
-                .Returns((Guid guid) => testAccounts.Find(a => a.Guid == guid))
+                .Returns((Guid guid) => testAccounts.First())
                 .Verifiable();
 
             mock
                 .Setup(ar => ar.AddAccount(It.IsAny<Account>()))
-                .Returns((int id) => testAccounts.Max(a => a.Id) + 1)
+                .Returns((Account account) => testAccounts.Max(a => a.Id) + 1)
                 .Verifiable();
 
             mock

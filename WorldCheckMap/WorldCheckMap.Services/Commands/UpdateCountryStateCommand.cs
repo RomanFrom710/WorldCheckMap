@@ -1,6 +1,5 @@
 ﻿using System;
 using WorldCheckMap.DataAccess.Enums;
-using WorldCheckMap.DataAccess.Models;
 
 namespace WorldCheckMap.Services.Commands
 {

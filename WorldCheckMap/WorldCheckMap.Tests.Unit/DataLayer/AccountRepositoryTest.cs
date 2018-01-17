@@ -6,8 +6,8 @@ using WorldCheckMap.DataAccess;
 using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.DataAccess.Repositories;
+using WorldCheckMap.Tests.Common;
 using WorldCheckMap.Tests.Unit.Infrastructure.DataLayer;
-using WorldCheckMap.Tests.Unit.Infrastructure.EqualityComparison;
 using WorldCheckMap.Tests.Unit.Infrastructure.Initializers;
 
 namespace WorldCheckMap.Tests.Unit.DataLayer

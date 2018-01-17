@@ -6,7 +6,7 @@ using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services.Commands;
 using WorldCheckMap.Services.Dto;
 
-namespace WorldCheckMap.Tests.Unit.Infrastructure.Initializers
+namespace WorldCheckMap.Tests.Common
 {
     internal static class TestData
     {
@@ -87,17 +87,6 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.Initializers
         {
             return GetAccounts()
                 .Select(a => new AddAccountCommand { Name = a.Name })
-                .ToList();
-        }
-
-        internal static List<UpdateCountryStateCommand> GetUpdateCountryStateCommands(Account account)
-        {
-            return account.CountryStates.Select(cs => new UpdateCountryStateCommand
-                {
-                    AccountGuid = account.Guid,
-                    CountryId = cs.CountryId,
-                    CountryStatus = cs.Status
-                })
                 .ToList();
         }
     }
