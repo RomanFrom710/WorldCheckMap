@@ -25,7 +25,8 @@ namespace WorldCheckMap.DependencyInjection
             return services
                 .AddScoped<IWorldCheckMapInitializer, WorldCheckMapInitializer>()
                 .AddScoped<ICountriesStorage, JsonCountriesStorage>()
-                .AddScoped<ICountryRepository, CountryRepository>();
+                .AddScoped<ICountryRepository, CountryRepository>()
+                .AddScoped<IAccountRepository, AccountRepository>();
         }
 
         public static IServiceCollection AddSqlContext(this IServiceCollection services, string connectionString)

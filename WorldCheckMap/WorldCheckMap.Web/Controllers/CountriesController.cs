@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using WorldCheckMap.Services.Dto;
+﻿using Microsoft.AspNetCore.Mvc;
 using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Web.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/countries")]
+    [Route("api/[controller]")]
     public class CountriesController : Controller
     {
         private readonly ICountryService _countryService;
@@ -17,9 +14,10 @@ namespace WorldCheckMap.Web.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CountryDto> Get()
+        public IActionResult Get()
         {
-            return _countryService.GetCountries();
+            var countries = _countryService.GetCountries();
+            return new JsonResult(countries);
         }
     }
 }

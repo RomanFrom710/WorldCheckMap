@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -23,16 +26,24 @@ namespace WorldCheckMap.Tests.Integration
         public async Task AccountActionsTest()
         {
             _client = ClientBuilder.GetClient();
+
             await TestAddAccount();
             await TestGetAccountByGuid();
             await TestGetAccountById();
+
+            await TestAddCountryState();
+            await TestGetAccountByGuid();
+
+            await TestUpdateCountryState();
+            await TestGetAccountById();
+
+            await TestNotFoundAccount();
         }
 
         private async Task TestAddAccount()
         {
-
             var addAccountCommand = TestData.GetAddAccountCommands().First();
-            var addAccountContent = new StringContent(JsonConvert.SerializeObject(addAccountCommand));
+            var addAccountContent = RequestBuilder.GetStringContentObject(JsonConvert.SerializeObject(addAccountCommand));
             var response = await _client.PostAsync("/api/accounts", addAccountContent);
             response.EnsureSuccessStatusCode();
 
@@ -45,7 +56,7 @@ namespace WorldCheckMap.Tests.Integration
             _expectedAccountState.CountryStates = _expectedAccountState.CountryStates ?? new List<CountryStateDto>();
         }
 
-        private async Task<AccountDto> TestAddCountryState()
+        private async Task TestAddCountryState()
         {
             var addStateCommand = new UpdateCountryStateCommand
             {
@@ -54,56 +65,73 @@ namespace WorldCheckMap.Tests.Integration
                 CountryStatus = CountryStatus.Been
             };
 
-            var addStateContent = new StringContent(JsonConvert.SerializeObject(addStateCommand));
+            var addStateContent = RequestBuilder.GetStringContentObject(JsonConvert.SerializeObject(addStateCommand));
             var response = await _client.PutAsync("/api/accounts", addStateContent);
             response.EnsureSuccessStatusCode();
 
-            _expectedAccountState.CountryStates = _expectedAccountState.CountryStates.
-
+            var countryState = new CountryStateDto
+            {
+                CountryId = addStateCommand.CountryId,
+                Status = addStateCommand.CountryStatus
+            };
+            _expectedAccountState.CountryStates = _expectedAccountState.CountryStates.Concat(new []{ countryState });
         }
 
-        private async Task<AccountDto> TestUpdateCountryState()
+        private async Task TestUpdateCountryState()
         {
+            var existentCountryState = _expectedAccountState.CountryStates.First();
+            var newStatus = Enum.GetValues(typeof(CountryStatus)).Cast<CountryStatus>()
+                .First(cs => cs != existentCountryState.Status);
 
-            var addAccountCommand = TestData.GetAddAccountCommands().First();
-            var addAccountContent = new StringContent(JsonConvert.SerializeObject(addAccountCommand));
-            var response = await _client.PostAsync("/api/accounts", addAccountContent);
+            var updateStateCommand = new UpdateCountryStateCommand
+            {
+                AccountGuid = _expectedAccountState.Guid,
+                CountryId = existentCountryState.CountryId,
+                CountryStatus = newStatus
+            };
+
+            var updateStateContent = RequestBuilder.GetStringContentObject(JsonConvert.SerializeObject(updateStateCommand));
+            var response = await _client.PutAsync("/api/accounts", updateStateContent);
+            response.EnsureSuccessStatusCode();
+
+            existentCountryState.Status = newStatus;
+        }
+
+        private async Task TestGetAccountById()
+        {
+            var response = await _client.GetAsync($"/api/accounts/{_expectedAccountState.Id}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
-            var account = JObject.Parse(content).ToObject<AccountDto>();
+            var foundAccount = JObject.Parse(content).ToObject<AccountDto>();
 
-            Assert.AreEqual(addAccountCommand.Name, account.Name);
+            Assert.AreNotEqual(_expectedAccountState.Guid, foundAccount.Guid, "It shouldn't be possible to get account guid by its id");
 
-            return account;
+            foundAccount.Guid = _expectedAccountState.Guid;
+            Assert.IsTrue(_expectedAccountState.IsEqual(foundAccount));
         }
 
-        private async Task<AccountDto> TestGetAccountById()
+        private async Task TestGetAccountByGuid()
         {
-            var response = await _client.GetAsync($"/api/accounts/{accountInfo.Id}");
+            var response = await _client.GetAsync($"/api/accounts/{_expectedAccountState.Guid}");
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
+            var foundAccount = JObject.Parse(content).ToObject<AccountDto>();
 
-            Assert.AreEqual(addAccountCommand.Name, account.Name);
-
-            return account;
+            Assert.IsTrue(_expectedAccountState.IsEqual(foundAccount));
         }
 
-        private async Task<AccountDto> TestGetAccountByGuid()
+        private async Task TestNotFoundAccount()
         {
+            var nonexistentGuid = Guid.NewGuid();
+            var nonexistentId = _expectedAccountState.Id + 1;
 
-            var addAccountCommand = TestData.GetAddAccountCommands().First();
-            var addAccountContent = new StringContent(JsonConvert.SerializeObject(addAccountCommand));
-            var response = await _client.PostAsync("/api/accounts", addAccountContent);
-            response.EnsureSuccessStatusCode();
+            var idResponse = await _client.GetAsync($"/api/accounts/{nonexistentId}");
+            Assert.AreEqual(HttpStatusCode.NotFound, idResponse.StatusCode);
 
-            var content = await response.Content.ReadAsStringAsync();
-            var account = JObject.Parse(content).ToObject<AccountDto>();
-
-            Assert.AreEqual(addAccountCommand.Name, account.Name);
-
-            return account;
+            var guidResponse = await _client.GetAsync($"/api/accounts/{nonexistentGuid}");
+            Assert.AreEqual(HttpStatusCode.NotFound, guidResponse.StatusCode);
         }
     }
 }

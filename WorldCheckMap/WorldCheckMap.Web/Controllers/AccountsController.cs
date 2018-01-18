@@ -1,13 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using WorldCheckMap.Services.Commands;
-using WorldCheckMap.Services.Dto;
 using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Web.Controllers
 {
-    [Produces("application/json")]
-    [Route("api/accounts")]
+    [Route("api/[controller]")]
     public class AccountsController : Controller
     {
         private readonly IAccountService _accountService;
@@ -17,32 +15,42 @@ namespace WorldCheckMap.Web.Controllers
             _accountService = accountService;
         }
 
-        [HttpGet]
-        [Route("/:id")]
-        public AccountDto Get(int id)
+        [HttpGet("{id:int}")]
+        public IActionResult Get(int id)
         {
-            return _accountService.GetAccount(id);
+            var account = _accountService.GetAccount(id);
+            if (account == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return new JsonResult(account);
         }
 
-        [HttpGet]
-        [Route("/:guid")]
-        public AccountDto Get(Guid guid)
+        [HttpGet("{guid:guid}")]
+        public IActionResult Get(Guid guid)
         {
-            return _accountService.GetAccount(guid);
+            var account = _accountService.GetAccount(guid);
+            if (account == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return new JsonResult(account);
         }
 
-        [HttpPost]
-        [Route("/")]
-        public AccountDto AddAccount(AddAccountCommand command)
+        [HttpPost("")]
+        public IActionResult AddAccount([FromBody] AddAccountCommand command)
         {
-            return _accountService.AddAccount(command);
+            var newAccount = _accountService.AddAccount(command);
+            return new JsonResult(newAccount);
         }
 
-        [HttpPut]
-        [Route("/")]
-        public void UpdateCountryState(UpdateCountryStateCommand command)
+        [HttpPut("")]
+        public IActionResult UpdateCountryState([FromBody] UpdateCountryStateCommand command)
         {
             _accountService.UpdateCountryState(command);
+            return new NoContentResult();
         }
     }
 }

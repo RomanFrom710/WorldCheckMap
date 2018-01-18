@@ -27,7 +27,7 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
                     Name = a.Name,
                     Guid = a.Guid,
                     Created = a.Created,
-                    CountryStates = a.CountryStates.Select(cs => new CountryStateDto
+                    CountryStates = a.CountryStates?.Select(cs => new CountryStateDto
                     {
                         Id = cs.Id,
                         CountryId = cs.CountryId,

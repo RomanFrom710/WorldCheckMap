@@ -22,6 +22,11 @@ namespace WorldCheckMap.Services
         public AccountDto GetAccount(Guid guid)
         {
             var accountModel = _repository.GetAccount(guid);
+            if (accountModel == null)
+            {
+                return null;
+            }
+
             var accountDto = _mapper.Map<AccountDto>(accountModel);
             return accountDto;
         }
@@ -29,6 +34,11 @@ namespace WorldCheckMap.Services
         public AccountDto GetAccount(int id)
         {
             var accountModel = _repository.GetAccount(id);
+            if (accountModel == null)
+            {
+                return null;
+            }
+
             var accountDto = _mapper.Map<AccountDto>(accountModel);
             accountDto.Guid = Guid.Empty;
             return accountDto;
@@ -42,14 +52,11 @@ namespace WorldCheckMap.Services
                 Guid = Guid.NewGuid(),
                 Created = DateTime.UtcNow
             };
+            var accountDto = _mapper.Map<AccountDto>(account);
 
             var id = _repository.AddAccount(account);
-            return new AccountDto
-            {
-                Id = id,
-                Guid = account.Guid,
-                Created = account.Created
-            };
+            accountDto.Id = id;
+            return accountDto;
         }
 
         public void UpdateCountryState(UpdateCountryStateCommand command)

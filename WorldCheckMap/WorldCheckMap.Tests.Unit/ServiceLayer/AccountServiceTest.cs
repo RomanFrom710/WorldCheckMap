@@ -51,12 +51,13 @@ namespace WorldCheckMap.Tests.Unit.ServiceLayer
             var mapper = ServiceLayerMocks.GetMapperMock();
             var service = new AccountService(repositoryMock.Object, mapper);
 
-            var addCommand = new AddAccountCommand { Name = "Roman" };
+            var addCommand = TestData.GetAddAccountCommands().First();
             var accountDto = service.AddAccount(addCommand);
 
             repositoryMock.Verify(ar => ar.AddAccount(It.Is((Account account) => account.Name == addCommand.Name)), Times.Once);
             Assert.AreNotEqual(Guid.Empty, accountDto.Guid);
             Assert.IsTrue(accountDto.Id > 0);
+            Assert.AreEqual(accountDto.Name, addCommand.Name);
         }
 
         [TestMethod]
