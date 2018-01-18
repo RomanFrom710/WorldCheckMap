@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import CreateAccount from '../components/main-page/CreateAccount';
 import { createAccount } from '../thunks/account-thunks';
 
 
@@ -9,15 +10,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    createAccount: () => dispatch(createAccount)
+    createAccount: accountInfo => createAccount(dispatch, accountInfo)
 });
 
 class MainPage extends Component {
     render() {
         return (
-            <button className="btn btn-primary" onClick={this.props.createAccount}>
-                Create an account
-                </button>
+            <CreateAccount createAccount={this.props.createAccount} />
         );
     }
 }

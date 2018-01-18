@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="app\components\main-page\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\WorldCheckMap.DependencyInjection\WorldCheckMap.DependencyInjection.csproj" />
     <ProjectReference Include="..\WorldCheckMap.Services\WorldCheckMap.Services.csproj" />
   </ItemGroup>

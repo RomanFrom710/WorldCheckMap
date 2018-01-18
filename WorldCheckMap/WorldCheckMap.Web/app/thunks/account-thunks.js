@@ -2,12 +2,14 @@
 import * as accountApi from '../api/account-api';
 
 
-export async function createAccount(dispatch) {
-    dispatch(accountActions.createAccount.request());
-    try {
-        const result = await accountApi.createAccount();
-        dispatch(accountActions.createAccount.success(result));
-    } catch(err) {
-        dispatch(accountActions.createAccount.failure(err));
-    }
+export function createAccount(dispatch, accountInfo) {
+    dispatch(async function(dispatch) {
+        dispatch(accountActions.createAccount.request());
+        try {
+            const result = await accountApi.createAccount(accountInfo);
+            dispatch(accountActions.createAccount.success(result));
+        } catch (err) {
+            dispatch(accountActions.createAccount.failure(err));
+        }
+    });
 }
