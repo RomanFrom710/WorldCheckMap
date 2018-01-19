@@ -52,5 +52,16 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.DataLayer
 
             return mock;
         }
+
+        internal static Mock<IWorldCheckMapInitializer> GetInitializerMock()
+        {
+            var mock = new Mock<IWorldCheckMapInitializer>();
+
+            mock
+                .Setup(init => init.InitializeDatabase())
+                .Verifiable();
+
+            return mock;
+        }
     }
 }

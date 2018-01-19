@@ -1,25 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorldCheckMap.Services.Interfaces;
-using WorldCheckMap.Web.ViewModels;
 
 namespace WorldCheckMap.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ICountryService _countryService;
+        private readonly ICoreDataService _initializationService;
 
-        public HomeController(ICountryService countryService)
+        public HomeController(ICoreDataService initializationService)
         {
-            _countryService = countryService;
+            _initializationService = initializationService;
         }
 
         public IActionResult Index()
         {
-            var initialState = new InitialState
-            {
-                Countries = _countryService.GetCountries()
-            };
-            return View(initialState);
+            var initData = _initializationService.GetClientInitData();
+            return View(initData);
         }
 
         public IActionResult Error()

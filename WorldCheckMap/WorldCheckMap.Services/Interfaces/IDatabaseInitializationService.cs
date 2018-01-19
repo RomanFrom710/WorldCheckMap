@@ -1,6 +1,6 @@
 ﻿namespace WorldCheckMap.Services.Interfaces
 {
-    public interface IInitializationService
+    public interface IDatabaseInitializationService
     {
         void InitializeData();
     }

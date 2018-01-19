@@ -92,7 +92,7 @@ namespace WorldCheckMap.Web
 
             using (var scope = scopeFactory.CreateScope())
             {
-                var initializer = scope.ServiceProvider.GetRequiredService<IInitializationService>();
+                var initializer = scope.ServiceProvider.GetRequiredService<IDatabaseInitializationService>();
                 initializer.InitializeData();
             }
         }

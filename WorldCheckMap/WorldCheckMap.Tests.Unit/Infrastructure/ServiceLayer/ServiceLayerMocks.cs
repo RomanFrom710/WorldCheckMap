@@ -3,6 +3,8 @@ using AutoMapper;
 using Moq;
 using WorldCheckMap.DataAccess.Models;
 using WorldCheckMap.Services.Dto;
+using WorldCheckMap.Services.Interfaces;
+using WorldCheckMap.Tests.Common;
 
 namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
 {
@@ -12,7 +14,7 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
         {
             var mockMapper = new Mock<IMapper>();
 
-            mockMapper.Setup(x => x.Map<CountryDto>(It.IsAny<Country>()))
+            mockMapper.Setup(m => m.Map<CountryDto>(It.IsAny<Country>()))
                 .Returns((Country c) => new CountryDto
                 {
                     Id = c.Id,
@@ -20,7 +22,7 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
                     Name = c.Name
                 });
 
-            mockMapper.Setup(x => x.Map<AccountDto>(It.IsAny<Account>()))
+            mockMapper.Setup(m => m.Map<AccountDto>(It.IsAny<Account>()))
                 .Returns((Account a) => new AccountDto
                 {
                     Id = a.Id,
@@ -36,6 +38,19 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
                 });
 
             return mockMapper.Object;
+        }
+
+        internal static ICountryService GetCountryServiceMock()
+        {
+            var mockService = new Mock<ICountryService>();
+            var testCountries = TestData.GetCountryDtos();
+
+            mockService
+                .Setup(s => s.GetCountries())
+                .Returns(testCountries)
+                .Verifiable();
+
+            return mockService.Object;
         }
     }
 }

@@ -3,11 +3,11 @@ using WorldCheckMap.Services.Interfaces;
 
 namespace WorldCheckMap.Services
 {
-    public class InitializationService : IInitializationService
+    public class DatabaseInitializationService : IDatabaseInitializationService
     {
         private readonly IWorldCheckMapInitializer _initializer;
 
-        public InitializationService(IWorldCheckMapInitializer initializer)
+        public DatabaseInitializationService(IWorldCheckMapInitializer initializer)
         {
             _initializer = initializer;
         }

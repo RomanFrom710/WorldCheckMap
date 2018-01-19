@@ -15,7 +15,8 @@ namespace WorldCheckMap.DependencyInjection
         public static IServiceCollection AddServiceLayerConnector(this IServiceCollection services)
         {
             return services
-                .AddScoped<IInitializationService, InitializationService>()
+                .AddScoped<IDatabaseInitializationService, DatabaseInitializationService>()
+                .AddScoped<ICoreDataService, CoreDataService>()
                 .AddScoped<ICountryService, CountryService>()
                 .AddScoped<IAccountService, AccountService>();
         }
