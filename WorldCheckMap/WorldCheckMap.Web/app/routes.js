@@ -11,6 +11,10 @@ export default [
         component: CheckMap
     },
     {
+        path: '/map/share/:id',
+        component: CheckMap
+    },
+    {
         path: '/',
         component: MainPage
     }
