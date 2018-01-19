@@ -1,4 +1,5 @@
 ﻿import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default class Header extends Component {
@@ -7,7 +8,7 @@ export default class Header extends Component {
             <nav className="navbar navbar-inverse">
                 <div className="container">
                     <div className="navbar-header">
-                        <a href="#" className="navbar-brand">WorldCheckMap</a>
+                        <Link to="/" className="navbar-brand">WorldCheckMap</Link>
                     </div>
                 </div>
             </nav>

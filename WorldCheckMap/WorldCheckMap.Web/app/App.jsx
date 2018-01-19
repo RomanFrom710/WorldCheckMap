@@ -21,14 +21,14 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <div>
-                    <Header />
-                    <div className="container">
-                        <ConnectedRouter history={history}>
+                <ConnectedRouter history={history}>
+                    <div>
+                        <Header />
+                        <div className="container">
                             {renderRoutes(routes)}
-                        </ConnectedRouter>
+                        </div>
                     </div>
-                </div>
+                </ConnectedRouter>
             </Provider>
         );
     }
