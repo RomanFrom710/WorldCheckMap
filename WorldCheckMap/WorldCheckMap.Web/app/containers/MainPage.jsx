@@ -6,7 +6,7 @@ import { createAccount } from '../thunks/account-thunks';
 
 
 const mapStateToProps = state => ({
-
+    isAccountCreating: state.account.isCreating
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -16,7 +16,10 @@ const mapDispatchToProps = dispatch => ({
 class MainPage extends Component {
     render() {
         return (
-            <CreateAccount createAccount={this.props.createAccount} />
+            <CreateAccount
+                createAccount={this.props.createAccount}
+                isAccountCreating={this.props.isAccountCreating}
+            />
         );
     }
 }

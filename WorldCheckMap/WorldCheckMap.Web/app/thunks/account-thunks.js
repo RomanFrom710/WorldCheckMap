@@ -7,6 +7,7 @@ import * as accountApi from '../api/account-api';
 export function createAccount(dispatch, accountInfo) {
     dispatch(async function(dispatch) {
         dispatch(accountActions.createAccount.request());
+
         try {
             const newAccount = await accountApi.createAccount(accountInfo);
             dispatch(accountActions.createAccount.success(newAccount));

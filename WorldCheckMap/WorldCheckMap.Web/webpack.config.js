@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.jsx$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: [
                     {
@@ -32,6 +32,7 @@ module.exports = {
                                 'react'
                             ],
                             plugins: [
+                                'transform-object-rest-spread',
                                 ['transform-class-properties', { spec: true }]
                             ]
                         }
