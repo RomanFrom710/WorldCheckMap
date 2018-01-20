@@ -11,7 +11,7 @@ import WorldMap from '../components/check-map/WorldMap';
 
 
 const mapStateToProps = state => ({
-    countries: state.countries.list,
+    countries: state.countries,
     accountInfo: state.account.info
 });
 

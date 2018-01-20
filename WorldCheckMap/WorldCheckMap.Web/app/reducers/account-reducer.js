@@ -5,10 +5,7 @@ import * as accountActions from '../actions/account-actions';
 
 const initialState = {
     isCreating: false,
-    name: null,
-    id: null,
-    guid: null,
-    countryStates: []
+    info: null
 };
 
 export default handleActions({

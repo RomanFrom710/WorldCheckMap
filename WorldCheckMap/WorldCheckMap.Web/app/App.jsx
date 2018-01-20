@@ -14,7 +14,7 @@ import Header from './components/header/Header';
 
 const history = createBrowserHistory();
 
-var initialState = {
+const initialState = {
     countries: {
         list: INITIAL_STATE.countries
     }
