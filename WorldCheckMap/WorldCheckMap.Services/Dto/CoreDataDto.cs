@@ -2,10 +2,10 @@
 
 namespace WorldCheckMap.Services.Dto
 {
-    public class ClientInitDataDto
+    public class CoreDataDto
     {
         public IEnumerable<CountryDto> Countries { get; set; }
 
-        public IDictionary<string, int> CountryStatusValues { get; set; }
+        public IEnumerable<string> CountryStatuses { get; set; }
     }
 }

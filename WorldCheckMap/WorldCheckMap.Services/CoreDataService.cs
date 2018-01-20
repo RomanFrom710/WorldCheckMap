@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using WorldCheckMap.DataAccess.Enums;
 using WorldCheckMap.Services.Dto;
 using WorldCheckMap.Services.Interfaces;
@@ -16,15 +14,14 @@ namespace WorldCheckMap.Services
             _countryService = countryService;
         }
 
-        public ClientInitDataDto GetClientInitData()
+        public CoreDataDto GetClientInitData()
         {
-            var statusValues = Enum.GetValues(typeof(CountryStatus)).Cast<int>()
-                .ToDictionary(v => Enum.GetName(typeof(CountryStatus), v));
+            var statuses = Enum.GetNames(typeof(CountryStatus));
 
-            return new ClientInitDataDto
+            return new CoreDataDto
             {
                 Countries = _countryService.GetCountries(),
-                CountryStatusValues = statusValues
+                CountryStatuses = statuses
             };
         }
     }

@@ -4,6 +4,6 @@ namespace WorldCheckMap.Services.Interfaces
 {
     public interface ICoreDataService
     {
-        ClientInitDataDto GetClientInitData();
+        CoreDataDto GetClientInitData();
     }
 }
