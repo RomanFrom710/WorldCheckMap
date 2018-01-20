@@ -16,8 +16,7 @@ const history = createBrowserHistory();
 
 var initialState = {
     countries: {
-        list: INITIAL_STATE.countries,
-        statuses: INITIAL_STATE.countryStatuses
+        list: INITIAL_STATE.countries
     }
 };
 window.INITIAL_STATE = undefined;

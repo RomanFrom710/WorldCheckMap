@@ -39,18 +39,5 @@ namespace WorldCheckMap.Tests.Unit.Infrastructure.ServiceLayer
 
             return mockMapper.Object;
         }
-
-        internal static ICountryService GetCountryServiceMock()
-        {
-            var mockService = new Mock<ICountryService>();
-            var testCountries = TestData.GetCountryDtos();
-
-            mockService
-                .Setup(s => s.GetCountries())
-                .Returns(testCountries)
-                .Verifiable();
-
-            return mockService.Object;
-        }
     }
 }

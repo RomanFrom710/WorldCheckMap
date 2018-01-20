@@ -11,7 +11,8 @@ import WorldMap from '../components/check-map/WorldMap';
 
 
 const mapStateToProps = state => ({
-    countries: state.countries
+    countries: state.countries.list,
+    accountInfo: state.account.info
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,7 +23,6 @@ class CheckMap extends Component {
     render() {
         return (
             <div>
-                {this.props.countries.toString()}
                 <WorldMap />
             </div>
         );

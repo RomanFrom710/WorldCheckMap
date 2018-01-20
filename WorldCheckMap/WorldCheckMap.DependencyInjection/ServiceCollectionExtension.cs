@@ -16,7 +16,6 @@ namespace WorldCheckMap.DependencyInjection
         {
             return services
                 .AddScoped<IDatabaseInitializationService, DatabaseInitializationService>()
-                .AddScoped<ICoreDataService, CoreDataService>()
                 .AddScoped<ICountryService, CountryService>()
                 .AddScoped<IAccountService, AccountService>();
         }
