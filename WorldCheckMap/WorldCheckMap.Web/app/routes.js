@@ -2,17 +2,17 @@
 import { Route } from 'react-router';
 
 import MainPage from './containers/MainPage';
-import CheckMap from './containers/CheckMap';
+import AccountPage from './containers/AccountPage';
 
 
 export default [
     {
         path: '/map/:guid',
-        component: CheckMap
+        component: AccountPage
     },
     {
         path: '/share/:id',
-        component: CheckMap
+        component: AccountPage
     },
     {
         path: '/',

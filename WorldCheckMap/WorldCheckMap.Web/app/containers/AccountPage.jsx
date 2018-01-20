@@ -9,6 +9,8 @@ import {
 } from 'react-simple-maps';
 
 import WorldMap from '../components/check-map/WorldMap';
+import CountryStateEditor from '../components/check-map/CountryStateEditor';
+import CountryStateViewer from '../components/check-map/CountryStateViewer';
 import { getAccount } from '../thunks/account-thunks';
 
 
@@ -24,15 +26,20 @@ const mapDispatchToProps = dispatch => ({
     getAccount: key => getAccount(dispatch, key)
 });
 
-class CheckMap extends Component {
+class AccountPage extends Component {
     componentDidMount() {
         this.props.getAccount(this.props.accountKey);
     }
 
     render() {
+        const countryStateComponent = this.props.isReadOnly ?
+            <CountryStateViewer /> :
+            <CountryStateEditor />;
+
         return (
             <BlockUi tag="div" blocking={this.props.isAccountLoading}>
                 <WorldMap countries={this.props.countries} />
+                {countryStateComponent}
             </BlockUi>
         );
     }
@@ -41,4 +48,4 @@ class CheckMap extends Component {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CheckMap);
+)(AccountPage);

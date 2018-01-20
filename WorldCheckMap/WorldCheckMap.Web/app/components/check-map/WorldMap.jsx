@@ -30,7 +30,7 @@ export default class WorldMap extends Component {
                 <MapLegend typeColors={this._statusColors} />
                 <ComposableMap>
                     <ZoomableGroup>
-                        <Geographies geographyUrl={require('react-simple-maps/topojson-maps/world-110m.json')}>
+                        <Geographies geography={require('react-simple-maps/topojson-maps/world-110m.json')}>
                             {(geographies, projection) => geographies.map((geography, i) => (
                                 <Geography
                                     key={`geography-${i}`}
