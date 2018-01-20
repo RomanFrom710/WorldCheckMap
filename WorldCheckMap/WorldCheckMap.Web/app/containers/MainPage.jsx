@@ -6,7 +6,7 @@ import { createAccount } from '../thunks/account-thunks';
 
 
 const mapStateToProps = state => ({
-    isAccountCreating: state.account.isCreating
+    isAccountCreating: state.account.isLoading
 });
 
 const mapDispatchToProps = dispatch => ({

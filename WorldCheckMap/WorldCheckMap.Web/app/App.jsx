@@ -2,10 +2,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { renderRoutes } from 'react-router-config';
 import { createBrowserHistory } from 'history';
+import ReduxToastr from 'react-redux-toastr';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducers from './reducers';
 import routes from './routes';
@@ -34,6 +35,7 @@ export default class App extends Component {
                         <div className="container">
                             {renderRoutes(routes)}
                         </div>
+                        <ReduxToastr />
                     </div>
                 </ConnectedRouter>
             </Provider>

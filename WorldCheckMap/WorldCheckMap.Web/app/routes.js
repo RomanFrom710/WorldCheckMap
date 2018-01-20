@@ -11,7 +11,7 @@ export default [
         component: CheckMap
     },
     {
-        path: '/map/share/:id',
+        path: '/share/:id',
         component: CheckMap
     },
     {

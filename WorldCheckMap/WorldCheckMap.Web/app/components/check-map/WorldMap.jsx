@@ -14,7 +14,7 @@ import statuses from '../../enums/country-statuses';
 export default class WorldMap extends Component {
     static propTypes = {
         countries: PropTypes.array.isRequired,
-        countryStates: PropTypes.array.isRequired
+        countryStates: PropTypes.array
     };
 
     _statusColors = {
