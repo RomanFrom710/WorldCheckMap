@@ -1,6 +1,6 @@
 ﻿import { handleActions, combineActions } from 'redux-actions';
 
-import * as accountActions from '../actions/account-actions';
+import { getAccount, createAccount } from '../actions/account-actions';
 
 
 const initialState = {
@@ -10,14 +10,14 @@ const initialState = {
 
 export default handleActions({
     [combineActions(
-        accountActions.getAccount.request,
-        accountActions.createAccount.request
+        getAccount.request,
+        createAccount.request
     )]: state => ({ ...state, isLoading: false }),
 
     [combineActions(
-        accountActions.createAccount.success,
-        accountActions.createAccount.failure,
-        accountActions.getAccount.success,
-        accountActions.getAccount.failure
+        createAccount.success,
+        createAccount.failure,
+        getAccount.success,
+        getAccount.failure
     )]: state => ({ ...state, isLoading: false })
 }, initialState);

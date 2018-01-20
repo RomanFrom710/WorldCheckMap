@@ -12,6 +12,7 @@ import WorldMap from '../components/check-map/WorldMap';
 import CountryStateEditor from '../components/check-map/CountryStateEditor';
 import CountryStateViewer from '../components/check-map/CountryStateViewer';
 import { getAccount } from '../thunks/account-thunks';
+import { selectCountry } from '../actions/country-actions';
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -23,7 +24,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getAccount: key => getAccount(dispatch, key)
+    getAccount: key => getAccount(dispatch, key),
+    selectCountry: countryCode => dispatch(selectCountry(countryCode))
 });
 
 class AccountPage extends Component {
@@ -32,13 +34,14 @@ class AccountPage extends Component {
     }
 
     render() {
+        const countryStates = this.props.accountInfo && this.props.accountInfo.countryStates;
         const countryStateComponent = this.props.isReadOnly ?
             <CountryStateViewer /> :
             <CountryStateEditor />;
 
         return (
             <BlockUi tag="div" blocking={this.props.isAccountLoading}>
-                <WorldMap countries={this.props.countries} />
+                <WorldMap countryStates={countryStates} selectCountry={this.props.selectCountry} />
                 {countryStateComponent}
             </BlockUi>
         );

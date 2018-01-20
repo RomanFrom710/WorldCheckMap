@@ -13,8 +13,8 @@ import statuses from '../../enums/country-statuses';
 
 export default class WorldMap extends Component {
     static propTypes = {
-        countries: PropTypes.array.isRequired,
-        countryStates: PropTypes.array
+        countryStates: PropTypes.array,
+        selectCountry: PropTypes.func
     };
 
     _statusColors = {
@@ -22,6 +22,11 @@ export default class WorldMap extends Component {
         [statuses.wish]: '#ff0000',
         [statuses.been]: '#00ff00',
         [statuses.lived]: '#0000ff'
+    };
+
+    _handleCountryClick = event => {
+        const countryCode = event.properties.ISO_A3;
+        this.props.selectCountry(countryCode);
     };
 
     render() {
@@ -34,6 +39,7 @@ export default class WorldMap extends Component {
                             {(geographies, projection) => geographies.map((geography, i) => (
                                 <Geography
                                     key={`geography-${i}`}
+                                    onClick={this._handleCountryClick}
                                     geography={geography}
                                     projection={projection}
                                     style={{

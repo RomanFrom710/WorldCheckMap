@@ -1,10 +1,13 @@
 ﻿import { handleActions } from 'redux-actions';
 
+import { selectCountry } from '../actions/country-actions';
+
 
 const initialState = {
-    list: []
+    list: [],
+    selected: null
 };
 
 export default handleActions({
-    // Empty reducers container is needed because countries are presented in the global initial state.
+    [selectCountry]: (state, { payload: countryCode }) => ({ ...state, selected: state.list.find(c => c.code === countryCode) })
 }, initialState);
