@@ -27,9 +27,14 @@ namespace WorldCheckMap.Web.Controllers
             return new JsonResult(account);
         }
 
-        [HttpGet("{guid:guid}")]
+        [HttpGet("{guid}")]
         public IActionResult Get(Guid guid)
         {
+            if (guid == Guid.Empty)
+            {
+                return new BadRequestResult();
+            }
+
             var account = _accountService.GetAccount(guid);
             if (account == null)
             {
