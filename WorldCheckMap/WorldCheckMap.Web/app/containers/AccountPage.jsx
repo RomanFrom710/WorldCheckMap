@@ -27,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getAccount: key => getAccount(dispatch, key),
+    getAccount: key => dispatch(getAccount(key)),
     selectCountry: countryCode => dispatch(selectCountry(countryCode))
 });
 

@@ -5,8 +5,8 @@ import * as accountActions from '../actions/account-actions';
 import * as accountApi from '../api/account-api';
 
 
-export function createAccount(dispatch, accountInfo) {
-    dispatch(async function(dispatch) {
+export function createAccount(accountInfo) {
+    return async function(dispatch) {
         dispatch(accountActions.createAccount.request());
 
         try {
@@ -16,11 +16,11 @@ export function createAccount(dispatch, accountInfo) {
         } catch (err) {
             dispatch(accountActions.createAccount.failure(err));
         }
-    });
+    };
 }
 
-export function getAccount(dispatch, key) {
-    dispatch(async function (dispatch) {
+export function getAccount(key) {
+    return async function(dispatch) {
         dispatch(accountActions.getAccount.request());
 
         try {
@@ -36,5 +36,6 @@ export function getAccount(dispatch, key) {
                 message: 'Please check the account key'
             }));
         }
-    });
+    }
 }
+

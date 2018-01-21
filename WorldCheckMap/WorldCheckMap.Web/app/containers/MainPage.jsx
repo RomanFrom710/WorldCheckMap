@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    createAccount: accountInfo => createAccount(dispatch, accountInfo)
+    createAccount: accountInfo => dispatch(createAccount(accountInfo))
 });
 
 class MainPage extends Component {
