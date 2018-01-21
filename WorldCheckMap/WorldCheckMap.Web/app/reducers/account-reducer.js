@@ -19,5 +19,7 @@ export default handleActions({
         createAccount.failure,
         getAccount.success,
         getAccount.failure
-    )]: state => ({ ...state, isLoading: false })
+    )]: state => ({ ...state, isLoading: false }),
+
+    [getAccount.success]: (state, { payload: account }) => ({ ...state, info: account })
 }, initialState);
