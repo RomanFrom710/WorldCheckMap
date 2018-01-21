@@ -28,14 +28,33 @@ export function getAccount(key) {
             dispatch(accountActions.getAccount.success(account));
         } catch (err) {
             dispatch(accountActions.getAccount.failure(err));
-            dispatch(push('/'));
 
+            dispatch(push('/'));
             dispatch(toastrActions.add({
                 type: 'error',
                 title: 'Account is not found',
                 message: 'Please check the account key'
             }));
         }
-    }
+    };
 }
 
+export function updateSelectedCountryStatus(status) {
+    return async function(dispatch, getState) {
+        dispatch(accountActions.updateState.request());
+
+        try {
+            const state = getState();
+            const updateCommand = {
+                countryStatus: status,
+                countryId: state.countries.selected.id,
+                accountGuid: state.account.info.guid
+            };
+
+            await accountApi.updateState(updateCommand);
+            dispatch(accountActions.updateState.success(updateCommand));
+        } catch (err) {
+            dispatch(accountActions.updateState.failure(err));
+        }
+    };
+}

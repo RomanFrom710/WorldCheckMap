@@ -18,10 +18,10 @@ export default class WorldMap extends Component {
     };
 
     _statusColors = {
-        [statuses.none]: '#ffffff',
-        [statuses.wish]: '#ff0000',
-        [statuses.been]: '#00ff00',
-        [statuses.lived]: '#0000ff'
+        [statuses.none.name]: '#ffffff',
+        [statuses.wish.name]: '#ff0000',
+        [statuses.been.name]: '#00ff00',
+        [statuses.lived.name]: '#0000ff'
     };
 
     _handleCountryClick = event => {

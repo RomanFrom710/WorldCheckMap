@@ -8,3 +8,7 @@ export function createAccount(accountInfo) {
 export function getAccount(key) {
     return api.get(`accounts/${key}`);
 }
+
+export function updateState(updateStateCommand) {
+    return api.put(`accounts`, updateStateCommand);
+}

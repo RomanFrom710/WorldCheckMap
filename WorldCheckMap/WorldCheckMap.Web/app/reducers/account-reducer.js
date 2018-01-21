@@ -1,25 +1,50 @@
 ﻿import { handleActions, combineActions } from 'redux-actions';
 
-import { getAccount, createAccount } from '../actions/account-actions';
+import { getAccount, createAccount, updateState } from '../actions/account-actions';
 
 
 const initialState = {
-    isLoading: false,
+    isInProgress: {
+        loading: false,
+        creating: false,
+        updating: false
+    },
     info: null
 };
 
 export default handleActions({
+    [getAccount.request]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, loading: true } }),
     [combineActions(
-        getAccount.request,
-        createAccount.request
-    )]: state => ({ ...state, isLoading: false }),
-
-    [combineActions(
-        createAccount.success,
-        createAccount.failure,
         getAccount.success,
         getAccount.failure
-    )]: state => ({ ...state, isLoading: false }),
+    )]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, loading: false } }),
+    [getAccount.success]: (state, { payload: account }) => ({ ...state, info: account }),
 
-    [getAccount.success]: (state, { payload: account }) => ({ ...state, info: account })
+
+    [createAccount.request]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, creating: true } }),
+    [combineActions(
+        createAccount.success,
+        createAccount.failure
+    )]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, creating: false } }),
+
+    [updateState.request]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, updating: true } }),
+    [combineActions(
+        updateState.success,
+        updateState.failure
+    )]: state => ({ ...state, isInProgress: { ...initialState.isInProgress, updating: false } }),
+
+    [updateState.success]: (state, { payload: updateInfo }) => {
+        const newState = { ...state };
+        const existentStatus = newState.info.countryStates.find(cs => cs.countryId === updateInfo.countryId);
+        if (existentStatus) {
+            existentStatus.status = updateInfo.countryStatus;
+        } else {
+            newState.info.countryStates.push({
+                countryId: updateInfo.countryId,
+                status: updateInfo.countryStatus
+            });
+        }
+
+        return newState;
+    }
 }, initialState);
