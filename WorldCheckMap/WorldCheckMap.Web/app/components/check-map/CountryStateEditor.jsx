@@ -13,8 +13,14 @@ export default class CountryStateEditor extends Component {
     state = { countryStatus: countryStatuses.none.code };
 
     componentWillReceiveProps(newProps) {
-        const newStatus = newProps.selectedCountry && newProps.selectedCountry.status;
-        this.setState({ countryStatus: newStatus || countryStatuses.none.code });
+        const oldCountryId = this.props.selectedCountry && this.props.selectedCountry.id;
+        const newCountryId = newProps.selectedCountry && newProps.selectedCountry.id;
+        if (oldCountryId === newCountryId) {
+            return;
+        }
+
+        const newCountryStatus = newProps.selectedCountry && newProps.selectedCountry.status;
+        this.setState({ countryStatus: newCountryStatus || countryStatuses.none.code });
     }
 
     _handleSaveClick = () => this.props.updateStatus(this.state.countryStatus);
