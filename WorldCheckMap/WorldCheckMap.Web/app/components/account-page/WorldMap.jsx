@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import geographies from 'react-simple-maps/topojson-maps/world-110m.json';
 import {
     ComposableMap,
     ZoomableGroup,
@@ -8,21 +9,34 @@ import {
 } from 'react-simple-maps';
 
 import MapLegend from './map-legend/MapLegend';
-import statuses from '../../enums/country-statuses';
+import statuses, { getStatusByCode } from '../../enums/country-statuses';
 
 
 export default class WorldMap extends Component {
     static propTypes = {
-        countryStates: PropTypes.array,
+        countriesWithStates: PropTypes.array.isRequired,
         selectCountry: PropTypes.func
     };
 
     _statusColors = {
-        [statuses.none.name]: '#ffffff',
+        [statuses.none.name]: '#dddddd',
         [statuses.wish.name]: '#ff0000',
         [statuses.been.name]: '#00ff00',
         [statuses.lived.name]: '#0000ff'
     };
+
+    _selectionColor = '#aaaaaa';
+
+    _getCountryColor(countryCode) {
+        const countries = this.props.countriesWithStates;
+        if (!countries) {
+            return '#ffffff';
+        }
+
+        const statusCode = countries.find(c => c.code === countryCode).status;
+        const statusName = getStatusByCode(statusCode).name;
+        return this._statusColors[statusName];
+    }
 
     _handleCountryClick = event => {
         const countryCode = event.properties.ISO_A3;
@@ -35,7 +49,7 @@ export default class WorldMap extends Component {
                 <MapLegend typeColors={this._statusColors} />
                 <ComposableMap>
                     <ZoomableGroup>
-                        <Geographies geography={require('react-simple-maps/topojson-maps/world-110m.json')}>
+                        <Geographies geography={geographies} disableOptimization={true}>
                             {(geographies, projection) => geographies.map((geography, i) => (
                                 <Geography
                                     key={`geography-${i}`}
@@ -44,10 +58,13 @@ export default class WorldMap extends Component {
                                     projection={projection}
                                     style={{
                                         default: {
-                                            stroke: "#FFF",
+                                            fill: this._getCountryColor(geography.properties.ISO_A3),
+                                            stroke: 'black',
                                             strokeWidth: 0.5,
-                                            outline: "none"
-                                        }
+                                            outline: 'none'
+                                        },
+                                        hover: { fill: this._selectionColor },
+                                        pressed: { fill: this._selectionColor }
                                     }}
                                 />
                             ))}

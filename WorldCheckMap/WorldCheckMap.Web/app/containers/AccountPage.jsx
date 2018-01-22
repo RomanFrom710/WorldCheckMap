@@ -46,21 +46,6 @@ class AccountPage extends Component {
         this.props.getAccount(this.props.accountKey);
     }
 
-    _getSelectedCountryInfo() {
-        const selectedCountry = this.props.selectedCountry;
-        if (!selectedCountry) {
-            return null;
-        }
-
-        const existentCountryState = this.props.accountInfo.countryStates &&
-            this.props.accountInfo.countryStates.find(cs => cs.countryId === selectedCountry.id);
-
-        return {
-            ...selectedCountry,
-            status: (existentCountryState && existentCountryState.status) || countryStatuses.none.code
-        };
-    }
-
     _getShareUrl() {
         const account = this.props.accountInfo;
         if (!account) {
@@ -71,12 +56,26 @@ class AccountPage extends Component {
         return `${baseUrl}${accountShareUrl}/${account.id}`;
     }
 
+    _getCountriesWithStates() {
+        const states = (this.props.accountInfo && this.props.accountInfo.countryStates) || [];
+
+        return this.props.countries.map(country => {
+            const state = states.find(s => s.countryId === country.id);
+            const status = (state && state.status) || countryStatuses.none.code;
+            return { ...country, status };
+        });
+    }
+
     render() {
         const account = { ...this.props.accountInfo };
+        const selectedCountry = this.props.selectedCountry;
+        const countriesWithStates = this._getCountriesWithStates();
+
+        const selectedCountryInfo = selectedCountry && countriesWithStates.find(c => c.id === selectedCountry.id);
 
         const countryStateComponent = this.props.isReadOnly ?
-            <CountryStateViewer selectedCountry={this._getSelectedCountryInfo()} accountName={account.name} /> :
-            <CountryStateEditor selectedCountry={this._getSelectedCountryInfo()} updateStatus={this.props.updateStatus} />;
+            <CountryStateViewer selectedCountry={selectedCountryInfo} accountName={account.name} /> :
+            <CountryStateEditor selectedCountry={selectedCountryInfo} updateStatus={this.props.updateStatus} />;
 
         const shareComponent = this.props.isReadOnly
             ? null
@@ -87,7 +86,7 @@ class AccountPage extends Component {
                 <AccountTitle name={account.name} />
                 <div className="row">
                     <div className="col-md-9">
-                        <WorldMap countryStates={account.countryStates} selectCountry={this.props.selectCountry} />
+                        <WorldMap countriesWithStates={countriesWithStates} selectCountry={this.props.selectCountry} />
                     </div>
                     <div className="col-md-3">
                         <BlockUi tag="div" blocking={this.props.isAccountUpdating}>

@@ -1,4 +1,4 @@
-﻿export default {
+﻿const statuses = {
     none: {
         name: 'None',
         code: 0
@@ -16,3 +16,10 @@
         code: 3
     }
 };
+
+export function getStatusByCode(code) {
+    const foundEntry = Object.entries(statuses).find(e => e[1].code === code);
+    return foundEntry[1];
+}
+
+export default statuses;

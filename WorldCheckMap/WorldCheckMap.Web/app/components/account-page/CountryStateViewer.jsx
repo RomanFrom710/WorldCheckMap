@@ -17,14 +17,16 @@ export default class CountryStateViewer extends Component {
         }
 
         const status = country.status;
-        if (!status || status === statuses.none) {
-            return 'wasn\'t';
-        } else if (status === statuses.wish) {
-            return 'wish to be';
-        } else if (status === statuses.been) {
-            return 'has been';
-        } else {
-            return status.toLowerCase();
+        switch (status) {
+            case statuses.wish.code:
+                return 'wish to be';
+            case statuses.been.code:
+                return 'has been';
+            case statuses.lived.code:
+                return 'lived';
+            case statuses.none.code:
+            default:
+                return 'wasn\'t';
         }
     }
 
