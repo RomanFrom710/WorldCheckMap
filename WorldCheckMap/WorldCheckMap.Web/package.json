@@ -27,6 +27,7 @@
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-block-ui": "^1.1.1",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "react-redux-toastr": "^7.2.0",

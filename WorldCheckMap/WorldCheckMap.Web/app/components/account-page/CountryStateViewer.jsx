@@ -11,15 +11,18 @@ export default class CountryStateViewer extends Component {
     };
 
     _getStatusVerb() {
-        if (!this.props.selectedCountry) {
+        const country = this.props.selectedCountry;
+        if (!country) {
             return null;
         }
 
-        const status = this.props.selectedCountry.status;
-        if (status === statuses.none) {
+        const status = country.status;
+        if (!status || status === statuses.none) {
             return 'wasn\'t';
         } else if (status === statuses.wish) {
             return 'wish to be';
+        } else if (status === statuses.been) {
+            return 'has been';
         } else {
             return status.toLowerCase();
         }
