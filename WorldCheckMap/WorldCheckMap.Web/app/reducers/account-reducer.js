@@ -35,6 +35,8 @@ export default handleActions({
 
     [updateState.success]: (state, { payload: updateInfo }) => {
         const newState = { ...state };
+        newState.info.countryStates = newState.info.countryStates.map(cs => ({ ...cs }));
+
         const existentStatus = newState.info.countryStates.find(cs => cs.countryId === updateInfo.countryId);
         if (existentStatus) {
             existentStatus.status = updateInfo.countryStatus;

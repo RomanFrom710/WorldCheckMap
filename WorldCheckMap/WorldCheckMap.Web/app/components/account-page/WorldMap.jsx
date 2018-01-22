@@ -14,7 +14,7 @@ import statuses, { getStatusByCode } from '../../enums/country-statuses';
 
 export default class WorldMap extends Component {
     static propTypes = {
-        countriesWithStates: PropTypes.array.isRequired,
+        countryCodeToStatusMap: PropTypes.instanceOf(Map).isRequired,
         selectCountry: PropTypes.func
     };
 
@@ -28,12 +28,7 @@ export default class WorldMap extends Component {
     _selectionColor = '#aaaaaa';
 
     _getCountryColor(countryCode) {
-        const countries = this.props.countriesWithStates;
-        if (!countries) {
-            return '#ffffff';
-        }
-
-        const statusCode = countries.find(c => c.code === countryCode).status;
+        const statusCode = this.props.countryCodeToStatusMap.get(countryCode);
         const statusName = getStatusByCode(statusCode).name;
         return this._statusColors[statusName];
     }

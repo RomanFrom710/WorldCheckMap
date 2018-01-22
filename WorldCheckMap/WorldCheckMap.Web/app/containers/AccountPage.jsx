@@ -17,12 +17,13 @@ import CountryStateViewer from '../components/account-page/CountryStateViewer';
 
 import { getAccount, updateSelectedCountryStatus } from '../thunks/account-thunks';
 import { selectCountry } from '../actions/country-actions';
-import countryStatuses from '../enums/country-statuses';
 import { accountShareUrl } from '../routes';
+import { getCountriesWithStates, getCountryCodeToStatusMap } from '../reducers/selectors';
 
 
 const mapStateToProps = (state, ownProps) => ({
-    countries: state.countries.list,
+    countriesWithStates: getCountriesWithStates(state),
+    countryCodeToStatusMap: getCountryCodeToStatusMap(state),
     selectedCountry: state.countries.selected,
     accountInfo: state.account.info,
     isAccountLoading: state.account.isInProgress.loading,
@@ -56,22 +57,11 @@ class AccountPage extends Component {
         return `${baseUrl}${accountShareUrl}/${account.id}`;
     }
 
-    _getCountriesWithStates() {
-        const states = (this.props.accountInfo && this.props.accountInfo.countryStates) || [];
-
-        return this.props.countries.map(country => {
-            const state = states.find(s => s.countryId === country.id);
-            const status = (state && state.status) || countryStatuses.none.code;
-            return { ...country, status };
-        });
-    }
-
     render() {
         const account = { ...this.props.accountInfo };
         const selectedCountry = this.props.selectedCountry;
-        const countriesWithStates = this._getCountriesWithStates();
 
-        const selectedCountryInfo = selectedCountry && countriesWithStates.find(c => c.id === selectedCountry.id);
+        const selectedCountryInfo = selectedCountry && this.props.countriesWithStates.find(c => c.id === selectedCountry.id);
 
         const countryStateComponent = this.props.isReadOnly ?
             <CountryStateViewer selectedCountry={selectedCountryInfo} accountName={account.name} /> :
@@ -86,7 +76,7 @@ class AccountPage extends Component {
                 <AccountTitle name={account.name} />
                 <div className="row">
                     <div className="col-md-9">
-                        <WorldMap countriesWithStates={countriesWithStates} selectCountry={this.props.selectCountry} />
+                        <WorldMap countryCodeToStatusMap={this.props.countryCodeToStatusMap} selectCountry={this.props.selectCountry} />
                     </div>
                     <div className="col-md-3">
                         <BlockUi tag="div" blocking={this.props.isAccountUpdating}>
