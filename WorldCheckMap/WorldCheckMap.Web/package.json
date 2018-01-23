@@ -8,9 +8,9 @@
     "build:client": "webpack",
     "build:server": "dotnet build",
     "test": "npm-run-all --parallel test:*",
-    "test:server": "npm-run-all --sequential build:server --parallel tests:*",
-    "tests:unit": "dotnet test --no-build ../WorldCheckMap.Tests.Unit/WorldCheckMap.Tests.Unit.csproj",
-    "tests:integration": "dotnet test --no-build ../WorldCheckMap.Tests.Integration/WorldCheckMap.Tests.Integration.csproj"
+    "test:server": "npm-run-all --parallel tests:*",
+    "tests:unit": "dotnet test ../WorldCheckMap.Tests.Unit/WorldCheckMap.Tests.Unit.csproj",
+    "tests:integration": "dotnet test ../WorldCheckMap.Tests.Integration/WorldCheckMap.Tests.Integration.csproj"
   },
   "repository": {
     "type": "git",
