@@ -9,27 +9,31 @@ import {
 } from 'react-simple-maps';
 
 import MapLegend from './map-legend/MapLegend';
-import statuses, { getStatusByCode } from '../../enums/country-statuses';
 
 
 export default class WorldMap extends Component {
     static propTypes = {
+        countryStatuses: PropTypes.object.isRequired,
         countryCodeToStatusMap: PropTypes.instanceOf(Map).isRequired,
         selectCountry: PropTypes.func
     };
 
-    _statusColors = {
-        [statuses.none.name]: '#dddddd',
-        [statuses.wish.name]: '#ff0000',
-        [statuses.been.name]: '#00ff00',
-        [statuses.lived.name]: '#0000ff'
-    };
+    componentWillMount() {
+        const statuses = this.props.countryStatuses;
+
+        this._statusColors = {
+            [statuses.none.name]: '#dddddd',
+            [statuses.wish.name]: '#ff0000',
+            [statuses.been.name]: '#00ff00',
+            [statuses.lived.name]: '#0000ff'
+        }
+    }
 
     _selectionColor = '#aaaaaa';
 
     _getCountryColor(countryCode) {
         const statusCode = this.props.countryCodeToStatusMap.get(countryCode);
-        const statusName = getStatusByCode(statusCode).name;
+        const statusName = Object.values(this.props.countryStatuses).find(v => v.code === statusCode).name;
         return this._statusColors[statusName];
     }
 

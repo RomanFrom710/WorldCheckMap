@@ -6,5 +6,7 @@ namespace WorldCheckMap.Services.Interfaces
     public interface ICountryService
     {
         IEnumerable<CountryDto> GetCountries();
+
+        CountriesInitialDataDto GetCountriesInitialData();
     }
 }

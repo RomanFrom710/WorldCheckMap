@@ -1,16 +1,15 @@
 ﻿import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import countryStatuses from '../../enums/country-statuses';
-
 
 export default class CountryStateEditor extends Component {
     static propTypes = {
+        countryStatuses: PropTypes.object.isRequired,
         selectedCountry: PropTypes.object,
         updateStatus: PropTypes.func.isRequired
     };
 
-    state = { countryStatus: countryStatuses.none.code };
+    state = { countryStatus: this.props.countryStatuses.none.code };
 
     componentWillReceiveProps(newProps) {
         const oldCountryId = this.props.selectedCountry && this.props.selectedCountry.id;
@@ -20,7 +19,7 @@ export default class CountryStateEditor extends Component {
         }
 
         const newCountryStatus = newProps.selectedCountry && newProps.selectedCountry.status;
-        this.setState({ countryStatus: newCountryStatus || countryStatuses.none.code });
+        this.setState({ countryStatus: newCountryStatus || this.props.countryStatuses.none.code });
     }
 
     _handleSaveClick = () => this.props.updateStatus(this.state.countryStatus);
@@ -33,7 +32,7 @@ export default class CountryStateEditor extends Component {
             return null;
         }
 
-        const statuses = Object.values(countryStatuses);
+        const statuses = Object.values(this.props.countryStatuses);
 
         return (
             <div>

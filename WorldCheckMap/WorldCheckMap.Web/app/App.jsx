@@ -17,10 +17,10 @@ const history = createBrowserHistory();
 
 const initialState = {
     countries: {
-        list: INITIAL_STATE.countries
+        list: INITIAL_DATA.countries,
+        statusesInfo: INITIAL_DATA.countryStatuses
     }
 };
-window.INITIAL_STATE = undefined;
 
 const middlewares = applyMiddleware(routerMiddleware(history), thunk);
 const store = createStore(reducers, initialState, composeWithDevTools(middlewares));

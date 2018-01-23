@@ -1,14 +1,13 @@
 ﻿import { createSelector } from 'reselect';
 
-import countryStatuses from '../enums/country-statuses';
-
 
 const countriesSelector = state => state.countries.list;
+const countryStatusesSelector = state => state.countries.statusesInfo;
 const countryStatesSelector = state => state.account.info && state.account.info.countryStates;
 
 export const getCountriesWithStates = createSelector(
-    [countriesSelector, countryStatesSelector],
-    (countries, countryStates) => {
+    [countriesSelector, countryStatusesSelector, countryStatesSelector],
+    (countries, countryStatuses, countryStates) => {
         const states = countryStates || [];
 
         return countries.map(country => {

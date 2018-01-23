@@ -1,4 +1,4 @@
-﻿@model WorldCheckMap.Web.ViewModels.InitialData
+﻿@model WorldCheckMap.Services.Dto.CountriesInitialDataDto
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,5 +6,5 @@
 <div id="react-root"></div>
 
 <script>
-    window.INITIAL_STATE = @Html.Raw(Json.Serialize(Model));
+    window.INITIAL_DATA = @Html.Raw(Json.Serialize(Model));
 </script>

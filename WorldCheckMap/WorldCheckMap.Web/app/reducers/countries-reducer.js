@@ -5,6 +5,7 @@ import { selectCountry } from '../actions/country-actions';
 
 const initialState = {
     list: [],
+    statusesInfo: [],
     selected: null
 };
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WorldCheckMap.Services.Interfaces;
-using WorldCheckMap.Web.ViewModels;
 
 namespace WorldCheckMap.Web.Controllers
 {
@@ -15,7 +14,7 @@ namespace WorldCheckMap.Web.Controllers
 
         public IActionResult Index()
         {
-            var initialData = new InitialData { Countries = _countryService.GetCountries() };
+            var initialData = _countryService.GetCountriesInitialData();
             return View(initialData);
         }
 
