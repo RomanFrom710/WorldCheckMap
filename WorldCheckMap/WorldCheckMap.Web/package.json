@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Mark countries you have already been to",
   "scripts": {
-    "start": "dotnet run",
     "build": "npm-run-all --parallel build:*",
     "build:client": "webpack",
     "build:server": "dotnet build"
