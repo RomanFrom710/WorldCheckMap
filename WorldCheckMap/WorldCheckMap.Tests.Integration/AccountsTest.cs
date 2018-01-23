@@ -40,18 +40,18 @@ namespace WorldCheckMap.Tests.Integration
         [TestMethod]
         public async Task NotFoundAccountTest()
         {
-            var client = ClientBuilder.GetNewServerClient();
+            _client = ClientBuilder.GetClient();
 
             var nonexistentGuid = Guid.NewGuid();
             var nonexistentId = -1;
 
-            var idResponse = await client.GetAsync($"/api/accounts/{nonexistentId}");
+            var idResponse = await _client.GetAsync($"/api/accounts/{nonexistentId}");
             Assert.AreEqual(HttpStatusCode.NotFound, idResponse.StatusCode);
 
-            var guidResponse = await client.GetAsync($"/api/accounts/{nonexistentGuid}");
+            var guidResponse = await _client.GetAsync($"/api/accounts/{nonexistentGuid}");
             Assert.AreEqual(HttpStatusCode.NotFound, guidResponse.StatusCode);
 
-            var invalidKeyResponse = await client.GetAsync("/api/accounts/fdasgsgdfs");
+            var invalidKeyResponse = await _client.GetAsync("/api/accounts/fdasgsgdfs");
             Assert.AreEqual(HttpStatusCode.BadRequest, invalidKeyResponse.StatusCode);
         }
 
