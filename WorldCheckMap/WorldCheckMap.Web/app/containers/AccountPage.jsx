@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import BlockUi from 'react-block-ui';
 import { actions as toastrActions } from 'react-redux-toastr';
+import { actions as tooltipActions } from 'redux-tooltip';
 import {
     ComposableMap,
     ZoomableGroup,
@@ -9,7 +10,7 @@ import {
     Geography,
 } from 'react-simple-maps';
 
-import WorldMap from '../components/account-page/WorldMap';
+import WorldMap from '../components/account-page/world-map/WorldMap';
 import AccountTitle from '../components/account-page/AccountTitle';
 import AccountShare from '../components/account-page/AccountShare';
 import CountryStateEditor from '../components/account-page/CountryStateEditor';
@@ -42,7 +43,9 @@ const mapDispatchToProps = dispatch => ({
     onShareLinkCopy: () => dispatch(toastrActions.add({
         type: 'success',
         title: 'The link has been copied to the clipboard'
-    }))
+    })),
+    showTooltip: options => dispatch(tooltipActions.show(options)),
+    hideTooltip: () => dispatch(tooltipActions.hide())
 });
 
 class AccountPage extends Component {
@@ -98,6 +101,8 @@ class AccountPage extends Component {
                             countryStatuses={this.props.statusesInfo}
                             countryCodeToStatusMap={this.props.countryCodeToStatusMap}
                             selectCountry={this.props.selectCountry}
+                            showTooltip={this.props.showTooltip}
+                            hideTooltip={this.props.hideTooltip}
                         />
                     </div>
                     <div className="col-md-3">

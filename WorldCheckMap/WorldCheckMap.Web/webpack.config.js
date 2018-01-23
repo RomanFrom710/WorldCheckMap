@@ -1,4 +1,5 @@
 ﻿const path = require('path');
+const webpack = require('webpack');
 
 
 module.exports = {
@@ -53,6 +54,5 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'less-loader']
             }
         ]
-    },
-    plugins: []
+    }
 };

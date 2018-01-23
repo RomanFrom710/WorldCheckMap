@@ -1,6 +1,7 @@
 ﻿import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import { reducer as toastrReducer } from 'react-redux-toastr'
+import { routerReducer as router } from 'react-router-redux';
+import { reducer as toastr } from 'react-redux-toastr';
+import { reducer as tooltip } from 'redux-tooltip';
 
 import account from './account-reducer';
 import countries from './countries-reducer';
@@ -9,6 +10,7 @@ import countries from './countries-reducer';
 export default combineReducers({
     account,
     countries,
-    router: routerReducer,
-    toastr: toastrReducer
+    router,
+    toastr,
+    tooltip
 });

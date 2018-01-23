@@ -6,6 +6,7 @@ import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
 import { renderRoutes } from 'react-router-config';
 import { createBrowserHistory } from 'history';
 import ReduxToastr from 'react-redux-toastr';
+import { Tooltip } from 'redux-tooltip';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import reducers from './reducers';
@@ -36,6 +37,7 @@ export default class App extends Component {
                             {renderRoutes(routes)}
                         </div>
                         <ReduxToastr />
+                        <Tooltip />
                     </div>
                 </ConnectedRouter>
             </Provider>

@@ -8,14 +8,17 @@ import {
     Geography,
 } from 'react-simple-maps';
 
-import MapLegend from './map-legend/MapLegend';
+import MapLegend from '../map-legend/MapLegend';
+import './world-map.less';
 
 
 export default class WorldMap extends Component {
     static propTypes = {
         countryStatuses: PropTypes.object.isRequired,
         countryCodeToStatusMap: PropTypes.instanceOf(Map).isRequired,
-        selectCountry: PropTypes.func
+        selectCountry: PropTypes.func,
+        showTooltip: PropTypes.func,
+        hideTooltip: PropTypes.func
     };
 
     componentWillMount() {
@@ -42,6 +45,19 @@ export default class WorldMap extends Component {
         this.props.selectCountry(countryCode);
     };
 
+    _handleMouseMove = (geography, event) => {
+        if (!this.props.showTooltip) {
+            return;
+        }
+
+        const x = event.clientX;
+        const y = event.clientY + window.pageYOffset;
+        this.props.showTooltip({
+            origin: { x, y },
+            content: geography.properties.NAME
+        });
+    }
+
     render() {
         return (
             <div>
@@ -52,9 +68,12 @@ export default class WorldMap extends Component {
                             {(geographies, projection) => geographies.map((geography, i) => (
                                 <Geography
                                     key={`geography-${i}`}
+                                    cacheId={`geography-${i}`}
                                     onClick={this._handleCountryClick}
                                     geography={geography}
                                     projection={projection}
+                                    onMouseMove={this._handleMouseMove}
+                                    onMouseLeave={this.props.hideTooltip}
                                     style={{
                                         default: {
                                             fill: this._getCountryColor(geography.properties.ISO_A3),
