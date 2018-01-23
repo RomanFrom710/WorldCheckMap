@@ -10,7 +10,7 @@ import {
     Geography,
 } from 'react-simple-maps';
 
-import WorldMap from '../components/account-page/world-map/WorldMap';
+import WorldMap from '../components/maps/WorldMap';
 import AccountTitle from '../components/account-page/AccountTitle';
 import AccountShare from '../components/account-page/AccountShare';
 import CountryStateEditor from '../components/account-page/CountryStateEditor';

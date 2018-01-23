@@ -25,6 +25,7 @@
     "history": "^4.7.2",
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
+    "randomcolor": "^0.5.3",
     "react": "^15.6.1",
     "react-block-ui": "^1.1.1",
     "react-copy-to-clipboard": "^5.0.1",

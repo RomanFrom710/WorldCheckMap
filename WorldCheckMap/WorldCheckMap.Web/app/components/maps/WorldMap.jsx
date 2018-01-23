@@ -8,8 +8,8 @@ import {
     Geography,
 } from 'react-simple-maps';
 
-import MapLegend from '../map-legend/MapLegend';
-import './world-map.less';
+import MapLegend from './map-legend/MapLegend';
+import './map-styles.less';
 
 
 export default class WorldMap extends Component {

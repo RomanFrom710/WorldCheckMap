@@ -2,10 +2,12 @@
 import { connect } from 'react-redux';
 
 import CreateAccount from '../components/main-page/CreateAccount';
+import DemoMap from '../components/maps/DemoMap';
 import { createAccount } from '../thunks/account-thunks';
 
 
 const mapStateToProps = state => ({
+    countries: state.countries.list,
     isAccountCreating: state.account.isInProgress.creating
 });
 
@@ -16,10 +18,14 @@ const mapDispatchToProps = dispatch => ({
 class MainPage extends Component {
     render() {
         return (
-            <CreateAccount
-                createAccount={this.props.createAccount}
-                isAccountCreating={this.props.isAccountCreating}
-            />
+            <div>
+                <h1>Share your travelling experience!</h1>
+                <CreateAccount
+                    createAccount={this.props.createAccount}
+                    isAccountCreating={this.props.isAccountCreating}
+                />
+                <DemoMap countries={this.props.countries} />
+            </div>
         );
     }
 }
