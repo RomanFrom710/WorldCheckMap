@@ -6,11 +6,7 @@
     "start": "dotnet run",
     "build": "npm-run-all --parallel build:*",
     "build:client": "webpack",
-    "build:server": "dotnet build",
-    "test": "npm-run-all --parallel test:*",
-    "test:server": "npm-run-all --parallel tests:*",
-    "tests:unit": "dotnet test ../WorldCheckMap.Tests.Unit/WorldCheckMap.Tests.Unit.csproj",
-    "tests:integration": "dotnet test ../WorldCheckMap.Tests.Integration/WorldCheckMap.Tests.Integration.csproj"
+    "build:server": "dotnet build"
   },
   "repository": {
     "type": "git",
