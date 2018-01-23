@@ -8,6 +8,7 @@ import './create-account.less';
 export default class CreateAccount extends Component {
     static propTypes = {
         createAccount: PropTypes.func.isRequired,
+        onEmptyAccountName: PropTypes.func,
         isAccountCreating: PropTypes.bool
     };
 
@@ -18,7 +19,11 @@ export default class CreateAccount extends Component {
     };
 
     _handleCreateButtonClick = () => {
-        this.props.createAccount({ name: this.name });
+        if (this.name) {
+            this.props.createAccount({ name: this.name });
+        } else {
+            this.props.onEmptyAccountName && this.props.onEmptyAccountName();
+        }
     };
 
     render() {
@@ -29,6 +34,7 @@ export default class CreateAccount extends Component {
                         placeholder="Your name..."
                         aria-label="Account name"
                         className="form-control account-name-input"
+                        required={true}
                         onChange={this._handleInputChange}
                     />
                     <button className="btn btn-primary create-account" onClick={this._handleCreateButtonClick}>

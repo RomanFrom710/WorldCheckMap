@@ -1,5 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { actions as toastrActions } from 'react-redux-toastr';
 
 import CreateAccount from '../components/main-page/CreateAccount';
 import DemoMap from '../components/maps/DemoMap';
@@ -12,7 +13,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    createAccount: accountInfo => dispatch(createAccount(accountInfo))
+    createAccount: accountInfo => dispatch(createAccount(accountInfo)),
+    onEmptyAccountName: () => dispatch(toastrActions.add({
+        type: 'error',
+        message: 'Please fill the account name'
+    }))
 });
 
 class MainPage extends Component {
@@ -23,6 +28,7 @@ class MainPage extends Component {
                 <CreateAccount
                     createAccount={this.props.createAccount}
                     isAccountCreating={this.props.isAccountCreating}
+                    onEmptyAccountName={this.props.onEmptyAccountName}
                 />
                 <DemoMap countries={this.props.countries} />
             </div>
