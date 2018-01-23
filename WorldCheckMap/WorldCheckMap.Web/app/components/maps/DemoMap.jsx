@@ -43,28 +43,30 @@ export default class DemoMap extends Component {
 
     render() {
         return (
-            <ComposableMap>
-                <Geographies geography={geographies}  disableOptimization={true}>
-                    {(geographies, projection) => geographies.map((geography, i) => (
-                        <Geography
-                            key={`geography-${i}`}
-                            cacheId={`geography-${i}`}
-                            geography={geography}
-                            projection={projection}
-                            style={{
-                                default: {
-                                    fill: this._getCountryColor(i),
-                                    stroke: 'black',
-                                    strokeWidth: 0.5,
-                                    outline: 'none'
-                                },
-                                hover: { fill: this._defaultColor, stroke: 'black' },
-                                pressed: { fill: this._defaultColor, stroke: 'black' }
-                            }}
-                        />
-                    ))}
-                </Geographies>
-            </ComposableMap>
+            <div className="map-container">
+                <ComposableMap>
+                    <Geographies geography={geographies}  disableOptimization={true}>
+                        {(geographies, projection) => geographies.map((geography, i) => (
+                            <Geography
+                                key={`geography-${i}`}
+                                cacheId={`geography-${i}`}
+                                geography={geography}
+                                projection={projection}
+                                style={{
+                                    default: {
+                                        fill: this._getCountryColor(i),
+                                        stroke: 'black',
+                                        strokeWidth: 0.5,
+                                        outline: 'none'
+                                    },
+                                    hover: { fill: this._defaultColor, stroke: 'black' },
+                                    pressed: { fill: this._defaultColor, stroke: 'black' }
+                                }}
+                            />
+                        ))}
+                    </Geographies>
+                </ComposableMap>
+            </div>
         );
     }
 }

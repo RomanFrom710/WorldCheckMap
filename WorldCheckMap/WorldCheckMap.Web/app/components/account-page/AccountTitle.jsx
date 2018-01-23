@@ -14,7 +14,7 @@ export default class AccountTitle extends Component {
         }
 
         return (
-            <h1 data-tip={name}>{name}'s World Check Map</h1>
+            <h1 className="text-center">{name}'s World Check Map</h1>
         );
     }
 }

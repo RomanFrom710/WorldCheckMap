@@ -19,7 +19,7 @@ class MainPage extends Component {
     render() {
         return (
             <div>
-                <h1>Share your travelling experience!</h1>
+                <h1 className="text-center">Share your travelling experience!</h1>
                 <CreateAccount
                     createAccount={this.props.createAccount}
                     isAccountCreating={this.props.isAccountCreating}

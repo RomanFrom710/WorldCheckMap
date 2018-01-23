@@ -1,6 +1,8 @@
 ﻿import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import './country-state-editor.less';
+
 
 export default class CountryStateEditor extends Component {
     static propTypes = {
@@ -37,7 +39,12 @@ export default class CountryStateEditor extends Component {
         return (
             <div>
                 <h2>{selectedCountry.name}</h2>
-                <select className="form-control" value={this.state.countryStatus} onChange={this._handleStatusChange}>
+                <select
+                    className="form-control country-status"
+                    value={this.state.countryStatus}
+                    onChange={this._handleStatusChange}
+                    aria-label={`Status of ${selectedCountry.name}`}
+                >
                     {statuses.map(s => (
                         <option value={s.code} key={s.code}>{s.name}</option>
                     ))}

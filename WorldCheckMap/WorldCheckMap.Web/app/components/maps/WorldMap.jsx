@@ -26,9 +26,9 @@ export default class WorldMap extends Component {
 
         this._statusColors = {
             [statuses.none.name]: '#dddddd',
-            [statuses.wish.name]: '#ff0000',
-            [statuses.been.name]: '#00ff00',
-            [statuses.lived.name]: '#0000ff'
+            [statuses.wish.name]: '#6bc1e5',
+            [statuses.been.name]: '#a53535',
+            [statuses.lived.name]: '#227c1a'
         }
     }
 
@@ -60,7 +60,7 @@ export default class WorldMap extends Component {
 
     render() {
         return (
-            <div>
+            <div className="map-container">
                 <MapLegend typeColors={this._statusColors} />
                 <ComposableMap>
                     <ZoomableGroup>

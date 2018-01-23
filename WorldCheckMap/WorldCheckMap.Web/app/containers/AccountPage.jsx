@@ -13,7 +13,7 @@ import {
 import WorldMap from '../components/maps/WorldMap';
 import AccountTitle from '../components/account-page/AccountTitle';
 import AccountShare from '../components/account-page/AccountShare';
-import CountryStateEditor from '../components/account-page/CountryStateEditor';
+import CountryStateEditor from '../components/account-page/state-editor/CountryStateEditor';
 import CountryStateViewer from '../components/account-page/CountryStateViewer';
 
 import { getAccount, updateSelectedCountryStatus } from '../thunks/account-thunks';
@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => ({
     updateStatus: status => dispatch(updateSelectedCountryStatus(status)),
     onShareLinkCopy: () => dispatch(toastrActions.add({
         type: 'success',
-        title: 'The link has been copied to the clipboard'
+        message: 'The link has been copied to the clipboard'
     })),
     showTooltip: options => dispatch(tooltipActions.show(options)),
     hideTooltip: () => dispatch(tooltipActions.hide())
@@ -111,7 +111,11 @@ class AccountPage extends Component {
                         </BlockUi>
                     </div>
                 </div>
-                {this._getShareComponent()}
+                <div className="row">
+                    <div className="col-md-6 col-md-offset-3">
+                        {this._getShareComponent()}
+                    </div>
+                </div>
             </BlockUi>
         );
     }
